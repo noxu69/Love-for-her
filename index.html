@@ -2,166 +2,186 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Ritija 💗🐱</title>
+<title>For Ritija 💗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
 body{
   margin:0;min-height:100dvh;
-  font-family:system-ui,Arial;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
   background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
   background-size:300% 300%;
   animation:bg 10s ease infinite;
-  display:flex;justify-content:center;align-items:center;
-  overflow:hidden;
+  display:flex;justify-content:center;align-items:center;overflow:hidden
 }
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-.love{
-  position:fixed;font-size:12px;font-weight:900;
-  color:#ff3f8e;opacity:.95
-}
-.tl{top:6px;left:6px}.tr{top:6px;right:6px}
-.bl{bottom:6px;left:6px}.br{bottom:6px;right:6px}
-.sideL,.sideR{top:50%;writing-mode:vertical-rl;transform:translateY(-50%)}
-.sideL{left:4px}.sideR{right:4px}
+/* LOVE EVERYWHERE */
+.corner{position:fixed;font-size:12px;font-weight:800;color:#ff3f8e;opacity:.9}
+.tl{top:8px;left:8px}.tr{top:8px;right:8px}.bl{bottom:8px;left:8px}.br{bottom:8px;right:8px}
+.side{position:fixed;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-weight:900;color:#ff3f8e}
+.left{left:4px}.right{right:4px}
 
-.page{
-  position:absolute;inset:0;display:none;
-  flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:28px
-}
+/* CATS */
+.cat{position:fixed;font-size:26px;animation:wiggle 3s infinite}
+.cat.tl{top:40px;left:10px}.cat.tr{top:40px;right:10px}
+.cat.bl{bottom:40px;left:10px}.cat.br{bottom:40px;right:10px}
+@keyframes wiggle{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg)}}
+
+/* FLOATING */
+.float{position:fixed;top:-10px;animation:fall 6s linear infinite;pointer-events:none}
+@keyframes fall{to{transform:translateY(120vh);opacity:0}}
+
+/* PAGES */
+.page{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px}
 .page.active{display:flex}
-
 h1,h2,p{color:#ff3f8e}
-p{max-width:860px;line-height:2.25;font-size:1.13rem;margin:14px 0}
-.type{min-height:260px}
+p{max-width:780px;line-height:2.1;font-size:1.1rem;margin:12px 0}
+.type{min-height:180px}
 
-input{
-  padding:14px;border-radius:25px;border:none;width:220px;
-  text-align:center;font-size:1rem
-}
+/* INPUT + BUTTON */
+input{padding:14px;border-radius:25px;border:none;width:240px;text-align:center;font-size:1rem}
 button{
-  margin-top:22px;padding:14px 42px;border:none;border-radius:34px;
+  margin-top:26px;padding:14px 40px;border:none;border-radius:32px;
   background:linear-gradient(135deg,#ff5fa2,#ff9acb);
-  color:white;font-size:1.05rem;font-weight:800;
+  color:white;font-size:1.05rem;font-weight:700;
   box-shadow:0 10px 28px rgba(255,105,180,.45)
 }
 button:active{transform:scale(.96)}
-.catBtn{background:linear-gradient(135deg,#ff8fc3,#ffd1ea)}
 
-.float{
-  position:fixed;top:-20px;
-  animation:fall 6s linear infinite;
-  pointer-events:none
-}
-@keyframes fall{to{transform:translateY(120vh);opacity:0}}
+/* HEART */
+.heart{font-size:72px;animation:beat 1s infinite}
+@keyframes beat{0%{transform:scale(1)}25%{transform:scale(1.25)}40%{transform:scale(1)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
 
-.timer{
-  margin-top:22px;padding:20px 30px;
-  background:rgba(255,255,255,.95);
-  border-radius:30px;font-weight:900
-}
-.big{font-size:1.5rem}
+/* TIMER */
+.timer{margin-top:20px;padding:18px 28px;background:rgba(255,255,255,.9);border-radius:28px;font-weight:900}
+.big{font-size:1.4rem}
+
+/* SWIPE HINT */
+.hint{opacity:.6;font-size:.9rem;margin-top:10px}
 </style>
 </head>
 
 <body>
 
-<!-- RITIJA EVERYWHERE -->
-<div class="love tl">I love Ritija 💗</div>
-<div class="love tr">I love Ritija 💗</div>
-<div class="love bl">I love Ritija 💗</div>
-<div class="love br">I love Ritija 💗</div>
-<div class="love sideL">Ritija 💗 Ritija 💗 Ritija</div>
-<div class="love sideR">I love Ritija endlessly 💗</div>
+<!-- LOVE EVERYWHERE -->
+<div class="corner tl">I love Ritija 💗</div><div class="corner tr">I love Ritija 💗</div>
+<div class="corner bl">I love Ritija 💗</div><div class="corner br">I love Ritija 💗</div>
+<div class="side left">I love Ritija 💗</div><div class="side right">I love Ritija 💗</div>
+
+<!-- CATS -->
+<div class="cat tl">🐱</div><div class="cat tr">🐱</div>
+<div class="cat bl">🐱</div><div class="cat br">🐱</div>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <h2>🔐 Only for Ritija</h2>
-  <input id="pass" placeholder="Enter password">
+  <h2>🔐 Secret</h2>
+  <p>Hint: <b>your fav person</b></p>
+  <input type="password" id="pass" placeholder="Enter password">
   <button onclick="go(2)">Unlock 💗</button>
+  <div class="hint">Swipe ➡️ also works</div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-  <h1>Hey Ritija 🐱💗</h1>
+  <h1>Hey Ritija 🌸</h1>
   <div class="type" id="t2"></div>
-  <button onclick="go(3)">Next 🐾</button>
+  <div class="hint">Swipe ➡️</div>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
+  <div class="heart">💗</div>
   <div class="type" id="t3"></div>
-  <button onclick="go(4)">Next 💗</button>
+  <div class="hint">Swipe ➡️</div>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <div class="type" id="t4"></div>
-  <button onclick="go(5)">Next 🌸</button>
+  <p>We are together for 💞</p>
+  <div class="timer" id="together"></div>
+  <div class="hint">Swipe ➡️</div>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-  <div class="type" id="t5"></div>
-  <button onclick="go(6)">Next 🐱</button>
+  <p>Total days together 🐾</p>
+  <div class="timer big" id="days"></div>
+  <div class="hint">Swipe ➡️</div>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-  <p>Ritija and me, together for 💞</p>
-  <div class="timer" id="together"></div>
-  <button class="catBtn" onclick="catRain()">CAT RAIN FOR RITIJA 🐱</button>
-  <button onclick="go(7)">Next</button>
+  <p>Total weeks together 🐾</p>
+  <div class="timer big" id="weeks"></div>
+  <div class="hint">Swipe ➡️</div>
 </div>
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-  <div class="type" id="t7"></div>
+  <p>Total hours together 🐾</p>
+  <div class="timer big" id="hours"></div>
+  <div class="hint">Swipe ➡️</div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+  <p>Total seconds together 🐾</p>
   <div class="timer big" id="seconds"></div>
+  <div class="hint">Swipe ➡️</div>
+</div>
+
+<!-- PAGE 9 (FINAL QUESTION) -->
+<div class="page" id="p9">
+  <h1>One last thing… 💗</h1>
+  <p><b>Who do I love the most?</b></p>
+  <input type="text" id="finalAns" placeholder="Type the name">
+  <button onclick="finalCheck()">Answer 💞</button>
+</div>
+
+<!-- PAGE 10 (END) -->
+<div class="page" id="p10">
+  <h1>Always you. 💗</h1>
+  <p>
+    No matter the page, the number, the day, the hour, or the second —
+    the answer stays the same.  
+    I love Ritija. Always. 🐱💗
+  </p>
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
+/* TEXT */
 const texts={
-t2:[
-"Ritija, this page exists only because of you. Because loving Ritija feels natural, calm, and right. Every thought here, every word, every tiny detail was made while thinking about Ritija and the way she makes the world feel softer."
-],
-t3:[
-"Ritija, loving you is not something I ever question. I love you in your happy moments, in your quiet moments, and even on days when you don’t see your own worth. I would do anything to protect your peace, your smile, and your heart."
-],
-t4:[
-"If Ritija ever doubts herself, I hope she remembers this: she is deeply loved, endlessly valued, and incredibly important. I don’t love a perfect idea of Ritija. I love the real Ritija, exactly as she is."
-],
-t5:[
-"No matter where life goes or how much time passes, I choose Ritija. Not once, not sometimes, but always. Loving Ritija is something I would do again and again without hesitation."
-],
-t7:[
-"Ritija, this time keeps moving, but my feelings don’t change. I love you more than words, more than time, and more than anything I could ever explain. Always you. 💗"
-]
+  t2:["This page exists because being together matters. It’s about choosing each other calmly, quietly, and sincerely, even in the smallest moments."],
+  t3:["This heart beats for us — for every day, every hour, every second that slowly turned into something real and meaningful."]
 };
-
-function typeLines(el, arr){
-  let j=0; el.innerHTML="";
-  (function t(){
-    if(j<=arr[0].length){
-      el.innerHTML=arr[0].slice(0,j++);
-      setTimeout(t,16);
+function typeLines(el, lines){
+  let i=0,j=0; el.innerHTML="";
+  (function next(){
+    if(i<lines.length){
+      if(j<=lines[i].length){
+        el.innerHTML=lines[i].slice(0,j++);
+        setTimeout(next,18);
+      }
     }
   })();
 }
 
-const startDate=new Date(Date.now()-(8*30*24*60*60)*1000);
+/* TIMER (8 months offset) */
+const startDate=new Date(Date.now()-(8*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
 function update(){
-  const d=Math.floor((Date.now()-startDate)/1000);
-  together.innerText=`${Math.floor(d/86400)} days ${Math.floor(d/3600)%24} hrs ${Math.floor(d/60)%60} min ${d%60} sec 💗`;
-  seconds.innerText=`${d} seconds with Ritija 💗`;
+  const diffSec=Math.floor((Date.now()-startDate)/1000);
+  together.innerText=`${Math.floor(diffSec/(30*86400))} months ${Math.floor(diffSec/86400)%30} days ${Math.floor(diffSec/3600)%24} hours ${Math.floor(diffSec/60)%60} minutes ${diffSec%60} seconds 💗`;
+  days.innerText=`${Math.floor(diffSec/86400)} days 💗`;
+  weeks.innerText=`${Math.floor(diffSec/(7*86400))} weeks 💗`;
+  hours.innerText=`${Math.floor(diffSec/3600)} hours 💗`;
+  seconds.innerText=`${diffSec} seconds 💗`;
 }
 setInterval(update,1000); update();
 
+/* PAGE CONTROL */
 let current=1;
 function go(n){
   if(n===2 && pass.value!=="prinsu") return;
@@ -170,19 +190,38 @@ function go(n){
   current=n;
   if(texts["t"+n]) typeLines(document.getElementById("t"+n),texts["t"+n]);
 }
-function replay(){go(1)}
+function replay(){
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p1").classList.add("active");
+  current=1;
+}
 
-function catRain(){
-  for(let i=0;i<25;i++){
-    const e=document.createElement("div");
-    e.className="float";
-    e.innerHTML=["🐱","🐾","💗","😺","Ritija"][Math.floor(Math.random()*5)];
-    e.style.left=Math.random()*100+"vw";
-    e.style.fontSize=(Math.random()*20+24)+"px";
-    document.body.appendChild(e);
-    setTimeout(()=>e.remove(),6000);
+/* FINAL ANSWER */
+function finalCheck(){
+  const v=document.getElementById("finalAns").value.trim().toLowerCase();
+  if(v==="ritija"){
+    go(10);
   }
 }
+
+/* SWIPE */
+let sx=0;
+document.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+  const dx=e.changedTouches[0].clientX-sx;
+  if(dx<-60 && current<10) go(current+1);
+  if(dx>60 && current>1) go(current-1);
+});
+
+/* FLOATING CATS + HEARTS */
+setInterval(()=>{
+  const e=document.createElement("div");
+  e.className="float";
+  e.innerHTML=["🐱","💗","🐾","✨","🌸"][Math.floor(Math.random()*5)];
+  e.style.left=Math.random()*100+"vw";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6000);
+},320);
 </script>
 
 </body>
