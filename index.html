@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Ritija ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+.container {
+  background: rgba(255,255,255,0.18);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.3);
+  max-width: 350px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #ff4f7a;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="mainBox">
+  <h1>Ritija ❤️</h1>
+  <p>
+    I just want you to know<br>
+    you mean the world to me 🌸<br>
+    Every smile of yours makes my day brighter ✨
+  </p>
+
+  <button onclick="surprise()">Tap for Surprise 🎁</button>
+</div>
+
+<script>
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 300);
+
+function surprise() {
+  document.getElementById("mainBox").innerHTML = `
+    <h1>I love you sooo much Ritija ❤️</h1>
+    <p>
+      You are my favorite person 💕<br>
+      My happiness, my peace, my smile 🌈<br>
+      I’m really lucky to have you 💖
+    </p>
+  `;
+}
+</script>
+
+</body>
+</html>
