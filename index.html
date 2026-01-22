@@ -25,7 +25,7 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CATS + LOVE */
+/* LOVE + CATS */
 .corner{
   position:fixed;
   font-size:12px;
@@ -104,6 +104,39 @@ input{
   font-weight:900;
   margin-top:12px;
 }
+
+/* PHOTO SLIDER */
+.slider{
+  width:85%;
+  max-width:320px;
+  height:420px;
+  position:relative;
+}
+.slide{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:26px;
+  opacity:0;
+  transition:.4s;
+}
+.slide.active{opacity:1}
+.caption{margin-top:12px;font-weight:600}
+.counter{font-weight:800;margin-top:4px}
+
+/* HEART POP */
+.heart-pop{
+  position:absolute;
+  font-size:40px;
+  animation:pop .8s forwards;
+}
+@keyframes pop{
+  0%{transform:scale(.3);opacity:0}
+  50%{opacity:1}
+  100%{transform:scale(1.5);opacity:0}
+}
 </style>
 </head>
 
@@ -128,58 +161,46 @@ input{
   <button onclick="go(2)">Unlock 💗</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="page" id="p2">
-  <h1>Hey Ritija 🌸</h1>
-  <div class="type" id="t2"></div>
-  <button onclick="go(3)">Next</button>
-</div>
-
-<!-- PAGE 3 -->
-<div class="page" id="p3">
-  <div class="type" id="t3"></div>
-  <button onclick="go(4)">Next</button>
-</div>
-
-<!-- PAGE 4 -->
-<div class="page" id="p4">
-  <div class="type" id="t4"></div>
-  <button onclick="go(5)">Next</button>
-</div>
+<!-- BIG PARAGRAPH PAGES -->
+<div class="page" id="p2"><div class="type" id="t2"></div><button onclick="go(3)">Next</button></div>
+<div class="page" id="p3"><div class="type" id="t3"></div><button onclick="go(4)">Next</button></div>
+<div class="page" id="p4"><div class="type" id="t4"></div><button onclick="go(5)">Next</button></div>
+<div class="page" id="p5"><div class="type" id="t5"></div><button onclick="go(6)">Next</button></div>
 
 <!-- TIME PAGES -->
-<div class="page" id="p5">
-  <p>Total weeks together 🐾</p>
-  <div class="timer" id="weeks"></div>
-  <button onclick="go(6)">Next</button>
-</div>
+<div class="page" id="p6"><p>Weeks together 🐾</p><div class="timer" id="weeks"></div><button onclick="go(7)">Next</button></div>
+<div class="page" id="p7"><p>Days together 🐾</p><div class="timer" id="days"></div><button onclick="go(8)">Next</button></div>
+<div class="page" id="p8"><p>Hours together 🐾</p><div class="timer" id="hours"></div><button onclick="go(9)">Next</button></div>
+<div class="page" id="p9"><p>Minutes together 🐾</p><div class="timer" id="minutes"></div><button onclick="go(10)">Next</button></div>
+<div class="page" id="p10"><p>Seconds together 🐾</p><div class="timer" id="seconds"></div><button onclick="go(11)">Next</button></div>
 
-<div class="page" id="p6">
-  <p>Total days together 🐾</p>
-  <div class="timer" id="days"></div>
-  <button onclick="go(7)">Next</button>
-</div>
-
-<div class="page" id="p7">
-  <p>Total hours together 🐾</p>
-  <div class="timer" id="hours"></div>
-  <button onclick="go(8)">Next</button>
-</div>
-
-<div class="page" id="p8">
-  <p>Total minutes together 🐾</p>
-  <div class="timer" id="minutes"></div>
-  <button onclick="go(9)">Next</button>
-</div>
-
-<div class="page" id="p9">
-  <p>Total seconds together 🐾</p>
-  <div class="timer" id="seconds"></div>
-  <button onclick="go(10)">Next</button>
+<!-- PHOTO PAGE -->
+<div class="page" id="p11">
+  <h1>You are so beautiful 💗</h1>
+  <div class="slider" onclick="heartPop(event)">
+    <img src="img1.jpg" class="slide active" data-cap="You are so beautiful 💗">
+    <img src="img2.jpg" class="slide" data-cap="I love your smile 🫶">
+    <img src="img3.jpg" class="slide" data-cap="You make everything better 🌸">
+    <img src="img4.jpg" class="slide" data-cap="I fall for you every day 💞">
+    <img src="img5.jpg" class="slide" data-cap="You are my favourite 🐱">
+    <img src="img6.jpg" class="slide" data-cap="Your eyes feel safe 💗">
+    <img src="img7.jpg" class="slide" data-cap="You look perfect ✨">
+    <img src="img8.jpg" class="slide" data-cap="You make me smile 🌸">
+    <img src="img9.jpg" class="slide" data-cap="Effortlessly beautiful 💞">
+    <img src="img10.jpg" class="slide" data-cap="I love you 💗">
+    <img src="img11.jpg" class="slide" data-cap="You feel like home 🐱">
+    <img src="img12.jpg" class="slide" data-cap="My calm 💕">
+    <img src="img13.jpg" class="slide" data-cap="I adore you 🌸">
+    <img src="img14.jpg" class="slide" data-cap="My happy place 💗">
+    <img src="img15.jpg" class="slide" data-cap="I choose you 🫶">
+    <img src="img16.jpg" class="slide" data-cap="Always you.">
+  </div>
+  <div class="caption" id="cap">You are so beautiful 💗</div>
+  <div class="counter" id="count">1 / 16</div>
 </div>
 
 <!-- FINAL PASSWORD -->
-<div class="page" id="p10">
+<div class="page" id="p12">
   <h1>One last thing 💗</h1>
   <p>Who do I love the most?</p>
   <input id="finalAns">
@@ -187,7 +208,7 @@ input{
 </div>
 
 <!-- FINAL BIG PARAGRAPH -->
-<div class="page" id="p11">
+<div class="page" id="p13">
   <h1>Always you 💗</h1>
   <div class="type" id="finalText"></div>
   <button onclick="go(1)">Replay 🔁</button>
@@ -196,33 +217,30 @@ input{
 <script>
 /* TYPEWRITER */
 function typeText(id,text){
-  let i=0;
-  const el=document.getElementById(id);
+  let i=0,el=document.getElementById(id);
   el.innerHTML="";
-  const timer=setInterval(()=>{
-    el.innerHTML+=text[i];
-    i++;
-    if(i>=text.length)clearInterval(timer);
+  const t=setInterval(()=>{
+    el.innerHTML+=text[i++];
+    if(i>=text.length)clearInterval(t);
   },18);
 }
 
-/* PARAGRAPHS */
 const texts={
 t2:"This page exists because some feelings deserve patience. Being together is not about rushing moments, but about staying, understanding, and choosing each other quietly, even when nothing extraordinary is happening.",
 t3:"There is comfort in knowing that someone feels like home. Someone whose presence makes ordinary days feel meaningful and safe.",
-t4:"Love grows slowly, honestly, and gently. It listens, it learns, and it stays even when things are calm and quiet."
+t4:"Love grows slowly, honestly, and gently. It listens, it learns, and it stays even when things are calm and quiet.",
+t5:"Every week, every day, every hour adds up to something beautiful when it is spent with the right person."
 };
 
-/* START DATE (8 months approx) */
+/* TIME */
 const startDate=new Date(Date.now()-(8*30*24*60*60*1000));
-
 setInterval(()=>{
-  const diff=Math.floor((Date.now()-startDate)/1000);
-  weeks.innerText=Math.floor(diff/(7*86400))+" weeks 💗";
-  days.innerText=Math.floor(diff/86400)+" days 💗";
-  hours.innerText=Math.floor(diff/3600)+" hours 💗";
-  minutes.innerText=Math.floor(diff/60)+" minutes 💗";
-  seconds.innerText=diff+" seconds 💗";
+  const d=Math.floor((Date.now()-startDate)/1000);
+  weeks.innerText=Math.floor(d/(7*86400));
+  days.innerText=Math.floor(d/86400);
+  hours.innerText=Math.floor(d/3600);
+  minutes.innerText=Math.floor(d/60);
+  seconds.innerText=d;
 },1000);
 
 /* PAGE CONTROL */
@@ -233,16 +251,40 @@ function go(n){
   document.getElementById("p"+n).classList.add("active");
   current=n;
   if(texts["t"+n])typeText("t"+n,texts["t"+n]);
-  if(n===11){
+  if(n===13){
     typeText("finalText",
       "After every week, every day, every hour, every minute, and every second, the answer never changes. Time doesn’t make this feeling smaller, it makes it clearer. Out of everyone, out of every moment, and out of every possible choice, I choose you. Quietly, honestly, and completely. You are not just someone I love — you are the place my heart feels most at home."
     );
   }
 }
 
+/* PHOTO SLIDER */
+let i=0;
+const slides=document.querySelectorAll(".slide");
+setInterval(()=>{
+  if(!document.getElementById("p11").classList.contains("active"))return;
+  if(i===slides.length-1)return;
+  slides[i].classList.remove("active");
+  i++;
+  slides[i].classList.add("active");
+  cap.innerText=slides[i].dataset.cap;
+  count.innerText=(i+1)+" / "+slides.length;
+},2500);
+
+/* HEART POP */
+function heartPop(e){
+  const h=document.createElement("div");
+  h.className="heart-pop";
+  h.innerText="💗";
+  h.style.left=e.offsetX+"px";
+  h.style.top=e.offsetY+"px";
+  e.currentTarget.appendChild(h);
+  setTimeout(()=>h.remove(),800);
+}
+
 /* FINAL CHECK */
 function checkFinal(){
-  if(finalAns.value.toLowerCase()==="ritija")go(11);
+  if(finalAns.value.toLowerCase()==="ritija")go(13);
 }
 
 /* FLOATING */
