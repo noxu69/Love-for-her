@@ -30,24 +30,31 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* SIDE STICKER */
-.sticker{
+/* STICKERS */
+.sticker-side{
   position:fixed;
   right:0;
-  top:40%;
+  top:35%;
   background:#ff5fa2;
   color:white;
   padding:10px 14px;
   border-radius:20px 0 0 20px;
   font-weight:700;
   writing-mode:vertical-rl;
-  text-orientation:mixed;
   box-shadow:0 8px 20px rgba(255,105,180,.5);
-  animation:wiggle 3s ease-in-out infinite;
 }
+
+.sticker-corner{
+  position:fixed;
+  left:10px;
+  top:10px;
+  font-size:26px;
+  animation:wiggle 3s infinite;
+}
+
 @keyframes wiggle{
   0%,100%{transform:rotate(0)}
-  50%{transform:rotate(-2deg)}
+  50%{transform:rotate(-10deg)}
 }
 
 /* PAGES */
@@ -66,15 +73,15 @@ body{
 h1,h2,p{color:#ff3f8e}
 
 p{
-  max-width:720px;
-  line-height:1.9;
-  font-size:1.08rem;
-  margin:10px 0;
+  max-width:760px;
+  line-height:2;
+  font-size:1.1rem;
+  margin:12px 0;
 }
 
-/* TYPEWRITER */
+/* TYPE */
 .type{
-  min-height:120px;
+  min-height:160px;
 }
 
 /* INPUT */
@@ -89,7 +96,7 @@ input{
 
 /* BUTTON */
 button{
-  margin-top:22px;
+  margin-top:24px;
   padding:14px 38px;
   border:none;
   border-radius:32px;
@@ -114,7 +121,7 @@ button:active{transform:scale(.96)}
 
 /* HEART */
 .heart{
-  font-size:64px;
+  font-size:68px;
   margin-bottom:10px;
   animation:beat 1s infinite;
 }
@@ -129,17 +136,24 @@ button:active{transform:scale(.96)}
 /* TIMER */
 .timer{
   margin-top:18px;
-  padding:16px 24px;
-  background:rgba(255,255,255,0.85);
-  border-radius:24px;
-  font-weight:700;
+  padding:16px 26px;
+  background:rgba(255,255,255,0.9);
+  border-radius:26px;
+  font-weight:800;
 }
 </style>
 </head>
 
 <body>
 
-<div class="sticker">I 💗 Ritija</div>
+<!-- STICKERS -->
+<div class="sticker-side">I 💗 Ritija</div>
+<div class="sticker-corner">🐱✨</div>
+
+<!-- AUDIO -->
+<audio id="typeSound" preload="auto">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1124.mp3">
+</audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -166,14 +180,14 @@ button:active{transform:scale(.96)}
 <!-- PAGE 4 -->
 <div class="page" id="p4">
   <div class="type" id="t4"></div>
-  <button onclick="go(5)">Next 💌</button>
+  <button onclick="go(5)">Next 💞</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
   <div class="type" id="t5"></div>
   <div class="timer" id="together"></div>
-  <button onclick="go(6)">Next 💞</button>
+  <button onclick="go(6)">Next 💌</button>
 </div>
 
 <!-- PAGE 6 -->
@@ -185,72 +199,73 @@ button:active{transform:scale(.96)}
 </div>
 
 <script>
-/* TYPEWRITER TEXT */
+/* TEXT CONTENT */
 const texts={
   t2:[
-    "This page exists because sometimes feelings need more space.",
-    "Because some connections deserve to be felt slowly.",
-    "And because being together quietly matters the most 💗"
+    "This page exists because some feelings deserve more than a message.",
+    "They deserve time, space, and softness.",
+    "They deserve to be felt slowly, without rushing 💗"
   ],
   t3:[
-    "This heart beats for every shared second.",
-    "For conversations, silence, and comfort.",
-    "For moments that felt like home 🌸"
+    "This heart beats for all the moments we shared.",
+    "For laughter that came naturally.",
+    "For silence that still felt full.",
+    "For comfort that never needed words 🌸"
   ],
   t4:[
-    "Not everything has to be loud to be meaningful.",
-    "Some things are special simply because they stay.",
-    "This is about that kind of togetherness 💞"
+    "Not everything meaningful is loud.",
+    "Some things stay quietly and change everything.",
+    "Being together like this — calmly, gently — is rare.",
+    "And that rarity is what makes it special 💞"
   ],
   t5:[
-    "Below is time — not just numbers.",
-    "Seconds that chose to stay.",
-    "Minutes that felt safe.",
-    "Time together, still growing 💗"
+    "Below is time together.",
+    "Not numbers, not calculations.",
+    "But proof that moments stayed.",
+    "Seconds turned into memories.",
+    "And memories turned into something beautiful 💗"
   ],
   t6:[
-    "Time keeps moving.",
-    "Feelings keep growing.",
-    "And being together still matters the most 🌸"
+    "Time keeps moving forward.",
+    "Hearts keep beating.",
+    "And being together still feels right.",
+    "Always 🌸"
   ]
 };
 
+/* TYPEWRITER */
+const sound=document.getElementById("typeSound");
 function typeLines(el, lines){
-  let i=0, j=0;
+  let i=0,j=0;
   el.innerHTML="";
   function next(){
     if(i<lines.length){
       if(j<=lines[i].length){
-        el.innerHTML = lines.slice(0,i).join("<br>") +
-          "<br>" + lines[i].slice(0,j++);
-        setTimeout(next,30);
+        el.innerHTML=lines.slice(0,i).join("<br><br>")+"<br><br>"+lines[i].slice(0,j++);
+        sound.currentTime=0; sound.play().catch(()=>{});
+        setTimeout(next,28);
       }else{
         i++; j=0;
-        setTimeout(next,500);
+        setTimeout(next,600);
       }
     }
   }
   next();
 }
 
-/* START TIMER FROM GIVEN OFFSET */
-const startDate = new Date(Date.now() - (
-  (3*30*24*60*60 + 14*24*60*60 + 5*60*60 + 49*60 + 30) * 1000
-));
-
+/* TIMER START OFFSET */
+const startDate=new Date(Date.now()-(3*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
 function update(){
   let diff=Math.floor((Date.now()-startDate)/1000);
   const s=diff%60; diff=Math.floor(diff/60);
   const m=diff%60; diff=Math.floor(diff/60);
   const h=diff%24; diff=Math.floor(diff/24);
   const d=diff%30; const mo=Math.floor(diff/30);
-
   const txt=`${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
   together.innerText=txt;
   together2.innerText=txt;
 }
-setInterval(update,1000);
-update();
+setInterval(update,1000); update();
 
 /* PAGE CONTROL */
 let current=1;
@@ -259,7 +274,7 @@ function go(n){
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
-  if(texts["t"+n]) typeLines(document.getElementById("t"+n), texts["t"+n]);
+  if(texts["t"+n]) typeLines(document.getElementById("t"+n),texts["t"+n]);
 }
 function replay(){
   document.getElementById("p"+current).classList.remove("active");
@@ -271,7 +286,7 @@ function replay(){
 setInterval(()=>{
   const e=document.createElement("div");
   e.className="float";
-  e.innerHTML=["💗","✨","🌸","🎀","💕"][Math.floor(Math.random()*5)];
+  e.innerHTML=["💗","✨","🌸","🎀","💕","🐱"][Math.floor(Math.random()*6)];
   e.style.left=Math.random()*100+"vw";
   document.body.appendChild(e);
   setTimeout(()=>e.remove(),6000);
