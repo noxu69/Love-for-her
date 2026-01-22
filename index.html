@@ -258,18 +258,26 @@ function go(n){
   }
 }
 
-/* PHOTO SLIDER */
-let i=0;
-const slides=document.querySelectorAll(".slide");
-setInterval(()=>{
-  if(!document.getElementById("p11").classList.contains("active"))return;
-  if(i===slides.length-1)return;
+/* PHOTO SLIDER — FIXED (GOES TO FINAL PASSWORD) */
+let i = 0;
+const slides = document.querySelectorAll(".slide");
+
+setInterval(() => {
+  if (!document.getElementById("p11").classList.contains("active")) return;
+
+  // If last photo reached → go to final password page
+  if (i === slides.length - 1) {
+    setTimeout(() => go(12), 1200); // p12 = final password page
+    return;
+  }
+
   slides[i].classList.remove("active");
   i++;
   slides[i].classList.add("active");
-  cap.innerText=slides[i].dataset.cap;
-  count.innerText=(i+1)+" / "+slides.length;
-},2500);
+
+  cap.innerText = slides[i].dataset.cap;
+  count.innerText = (i + 1) + " / " + slides.length;
+}, 2500);
 
 /* HEART POP */
 function heartPop(e){
