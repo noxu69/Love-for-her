@@ -6,20 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-html,body{
+body{
   margin:0;
-  padding:0;
-  height:100%;
-  font-family:'Segoe UI',sans-serif;
+  height:100vh;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
+  background-size:400% 400%;
+  animation:bg 12s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   overflow:hidden;
 }
 
-/* BACKGROUND */
-body{
-  background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
-  background-size:400% 400%;
-  animation:bg 14s ease infinite;
-}
 @keyframes bg{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -28,68 +27,77 @@ body{
 
 /* PAGES */
 .page{
-  position:fixed;
+  position:absolute;
   inset:0;
   display:none;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   text-align:center;
   padding:30px;
 }
-.active{display:flex;}
+.page.active{display:flex;}
 
-/* TEXT */
-h1,h2,p{
-  color:#ff3f8e;
-}
+h1,h2,p{color:#ff3f8e}
+
 p{
-  font-size:1.08rem;
-  line-height:1.8;
-  max-width:650px;
-}
-
-/* BUTTON */
-button{
-  margin-top:25px;
-  padding:14px 38px;
-  border:none;
-  border-radius:40px;
-  background:linear-gradient(135deg,#ff5fa2,#ff9acb);
-  color:white;
-  font-size:1.05rem;
-  box-shadow:0 10px 30px rgba(255,105,180,.6);
+  max-width:600px;
+  line-height:1.7;
 }
 
 /* INPUT */
 input{
-  padding:13px;
+  padding:14px;
   border-radius:25px;
   border:none;
-  width:230px;
+  width:220px;
   text-align:center;
-  font-size:1rem;
+}
+
+/* BUTTON */
+button{
+  margin-top:20px;
+  padding:14px 36px;
+  border:none;
+  border-radius:30px;
+  background:#ff5fa2;
+  color:white;
+  font-size:16px;
+  box-shadow:0 8px 25px rgba(255,105,180,.5);
 }
 
 /* FLOATING */
 .float{
   position:fixed;
   top:-10px;
-  animation:fall linear infinite;
+  animation:fall 5s linear infinite;
   pointer-events:none;
 }
+
 @keyframes fall{
-  to{transform:translateY(120vh); opacity:0}
+  to{transform:translateY(120vh);opacity:0}
 }
 
-/* CAT */
-.cat{
-  font-size:70px;
-  animation:bounce 1.3s infinite;
+/* HEARTBEAT */
+.heart{
+  font-size:60px;
+  animation:beat 1s infinite;
 }
-@keyframes bounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-18px)}
+@keyframes beat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.25)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* TIMER */
+.timer{
+  margin-top:15px;
+  padding:12px 20px;
+  background:rgba(255,255,255,0.75);
+  border-radius:20px;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -100,87 +108,94 @@ input{
 <div class="page active" id="p1">
   <h2>🔐 Secret</h2>
   <p>Hint: <b>your fav person</b></p>
-  <input id="pass" type="password" placeholder="Enter password">
+  <input type="password" id="pass">
   <button onclick="go(2)">Unlock 💗</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
   <h1>Hey Ritija 🌸</h1>
-  <p id="daily"></p>
+  <p>
+    This page exists because two people stayed.
+    And every second since then has mattered 💗
+  </p>
   <button onclick="go(3)">Next ✨</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <div class="cat" onclick="catTap()">🐱</div>
+  <div class="heart">💗</div>
   <p>
-    Some people don’t even try,
-    yet they become something important.
-    Something warm.
-    Something safe.
-    You’re that kind of person 💗
+    This heart beats for every second
+    we’ve spent together 🌸
   </p>
   <button onclick="go(4)">Next 🥺</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <p>
-    Your presence has a way of softening everything.
-    Conversations feel calmer.
-    Moments feel lighter.
-    Even silence feels comfortable when it involves you 🌸
-  </p>
-  <p>
-    This gentle pink world moving in the background
-    is just trying to reflect that feeling —
-    calm, warm, and quietly happy 💞
-  </p>
+  <p>Time together 💞</p>
+  <div class="timer" id="together"></div>
   <button onclick="go(5)">Next 💌</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-  <p>
-    If you ever forget how much you matter,
-    remember this moment.
-    Remember that effort was made,
-    time was spent,
-    and care was poured into this —
-    just for you 💗
-  </p>
-  <p>
-    You deserve softness.
-    You deserve kindness.
-    You deserve to feel special 🌸
-  </p>
-  <button onclick="go(6)">One last thing 💖</button>
+  <h2>🎯 Next Milestone</h2>
+  <p>9 February 💕</p>
+  <div class="timer" id="milestone"></div>
+  <button onclick="go(6)">Last 💖</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-  <h1>I’m really glad you exist, Ritija 💗</h1>
-  <p>
-    This isn’t just a website.
-    It’s a reminder.
-    A small, pink, gentle reminder —
-    that you are appreciated,
-    you are valued,
-    and you will always be special ✨
-  </p>
+  <h1>Still counting… 💗</h1>
+  <div class="timer" id="together2"></div>
+  <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-/* DAILY MESSAGE */
-const dailyTexts=[
-  "Today’s reminder: you are deeply appreciated 💗",
-  "Just so you know — you make things better 🌸",
-  "If today feels heavy, you’re still enough ✨",
-  "You’re someone worth choosing, always 💞"
-];
-document.getElementById("daily").innerText=
-  dailyTexts[new Date().getDate()%dailyTexts.length];
+/* START FROM 3m 14d 5h 49m 30s */
+const startDate = new Date(Date.now() - (
+  (3*30*24*60*60 + 14*24*60*60 + 5*60*60 + 49*60 + 30) * 1000
+));
+
+const milestoneDate = new Date("2026-02-09T00:00:00");
+
+/* UPDATE TIMERS */
+function update(){
+  const now = new Date();
+
+  let diff = Math.floor((now - startDate)/1000);
+  const s = diff % 60;
+  diff = Math.floor(diff/60);
+  const m = diff % 60;
+  diff = Math.floor(diff/60);
+  const h = diff % 24;
+  diff = Math.floor(diff/24);
+  const d = diff % 30;
+  const mo = Math.floor(diff/30);
+
+  const txt = `${mo} months ${d} days ${h} hrs ${m} min ${s} sec 💗`;
+  document.getElementById("together").innerText = txt;
+  document.getElementById("together2").innerText = txt;
+
+  let md = Math.floor((milestoneDate - now)/1000);
+  if(md <= 0){
+    document.getElementById("milestone").innerText = "🎉 Milestone reached!";
+  }else{
+    const ms = md % 60;
+    md = Math.floor(md/60);
+    const mm = md % 60;
+    md = Math.floor(md/60);
+    const mh = md % 24;
+    const mdays = Math.floor(md/24);
+    document.getElementById("milestone").innerText =
+      `${mdays} days ${mh} hrs ${mm} min ${ms} sec 💗`;
+  }
+}
+setInterval(update,1000);
+update();
 
 /* PAGE CONTROL */
 let current=1;
@@ -189,45 +204,23 @@ function go(n){
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
-  sparkle();
 }
 
-/* SWIPE SUPPORT */
-let startX=0;
-document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-document.addEventListener("touchend",e=>{
-  if(startX - e.changedTouches[0].clientX > 60 && current<6){
-    go(current+1);
-  }
-});
+function replay(){
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p1").classList.add("active");
+  current=1;
+}
 
 /* FLOATING EMOJIS */
-function float(){
+setInterval(()=>{
   const e=document.createElement("div");
   e.className="float";
-  e.innerHTML=["💗","✨","🐱","🌸","🎀","💕"][Math.floor(Math.random()*6)];
+  e.innerHTML=["💗","✨","🌸","🎀","💕"][Math.floor(Math.random()*5)];
   e.style.left=Math.random()*100+"vw";
-  e.style.fontSize=(Math.random()*12+18)+"px";
-  e.style.animationDuration=(Math.random()*3+4)+"s";
   document.body.appendChild(e);
-  setTimeout(()=>e.remove(),7000);
-}
-setInterval(float,250);
-
-/* EASTER EGG */
-let taps=0;
-function catTap(){
-  taps++;
-  sparkle();
-  if(taps===7){
-    alert("🐱 Easter Egg: The cats chose you 💗");
-  }
-}
-
-/* SOFT SPARKLE EFFECT */
-function sparkle(){
-  for(let i=0;i<20;i++) float();
-}
+  setTimeout(()=>e.remove(),5000);
+},300);
 </script>
 
 </body>
