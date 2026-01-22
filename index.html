@@ -30,7 +30,20 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* STICKERS */
+/* CORNER TEXT */
+.corner{
+  position:fixed;
+  font-size:12px;
+  font-weight:700;
+  color:#ff3f8e;
+  opacity:0.8;
+}
+.tl{top:10px;left:10px}
+.tr{top:10px;right:10px}
+.bl{bottom:10px;left:10px}
+.br{bottom:10px;right:10px}
+
+/* SIDE STICKER */
 .sticker-side{
   position:fixed;
   right:0;
@@ -42,19 +55,6 @@ body{
   font-weight:700;
   writing-mode:vertical-rl;
   box-shadow:0 8px 20px rgba(255,105,180,.5);
-}
-
-.sticker-corner{
-  position:fixed;
-  left:10px;
-  top:10px;
-  font-size:26px;
-  animation:wiggle 3s infinite;
-}
-
-@keyframes wiggle{
-  0%,100%{transform:rotate(0)}
-  50%{transform:rotate(-10deg)}
 }
 
 /* PAGES */
@@ -79,10 +79,7 @@ p{
   margin:12px 0;
 }
 
-/* TYPE */
-.type{
-  min-height:160px;
-}
+.type{min-height:160px}
 
 /* INPUT */
 input{
@@ -146,13 +143,17 @@ button:active{transform:scale(.96)}
 
 <body>
 
-<!-- STICKERS -->
-<div class="sticker-side">I 💗 Ritija</div>
-<div class="sticker-corner">🐱✨</div>
+<!-- CORNERS -->
+<div class="corner tl">I love Ritija soo much 💗</div>
+<div class="corner tr">I love Ritija soo much 💗</div>
+<div class="corner bl">I love Ritija soo much 💗</div>
+<div class="corner br">I love Ritija soo much 💗</div>
 
-<!-- AUDIO -->
-<audio id="typeSound" preload="auto">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1124.mp3">
+<div class="sticker-side">I 💗 Ritija</div>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
 <!-- PAGE 1 -->
@@ -199,42 +200,36 @@ button:active{transform:scale(.96)}
 </div>
 
 <script>
-/* TEXT CONTENT */
+/* TEXT */
 const texts={
   t2:[
-    "This page exists because some feelings deserve more than a message.",
-    "They deserve time, space, and softness.",
-    "They deserve to be felt slowly, without rushing 💗"
+    "This page exists because love deserves effort.",
+    "Because some feelings deserve to be felt slowly.",
+    "And because being together matters more than anything 💗"
   ],
   t3:[
-    "This heart beats for all the moments we shared.",
-    "For laughter that came naturally.",
-    "For silence that still felt full.",
-    "For comfort that never needed words 🌸"
+    "This heart beats for us.",
+    "For every smile, every pause, every moment.",
+    "For everything that felt right 🌸"
   ],
   t4:[
     "Not everything meaningful is loud.",
-    "Some things stay quietly and change everything.",
-    "Being together like this — calmly, gently — is rare.",
-    "And that rarity is what makes it special 💞"
+    "Some love stays quiet and strong.",
+    "And that kind of love lasts 💞"
   ],
   t5:[
     "Below is time together.",
-    "Not numbers, not calculations.",
-    "But proof that moments stayed.",
-    "Seconds turned into memories.",
-    "And memories turned into something beautiful 💗"
+    "Not numbers — memories.",
+    "Seconds turning into something beautiful 💗"
   ],
   t6:[
-    "Time keeps moving forward.",
-    "Hearts keep beating.",
-    "And being together still feels right.",
-    "Always 🌸"
+    "Time keeps moving.",
+    "Love keeps growing.",
+    "And I still choose you 🌸"
   ]
 };
 
 /* TYPEWRITER */
-const sound=document.getElementById("typeSound");
 function typeLines(el, lines){
   let i=0,j=0;
   el.innerHTML="";
@@ -242,7 +237,6 @@ function typeLines(el, lines){
     if(i<lines.length){
       if(j<=lines[i].length){
         el.innerHTML=lines.slice(0,i).join("<br><br>")+"<br><br>"+lines[i].slice(0,j++);
-        sound.currentTime=0; sound.play().catch(()=>{});
         setTimeout(next,28);
       }else{
         i++; j=0;
@@ -253,24 +247,31 @@ function typeLines(el, lines){
   next();
 }
 
-/* TIMER START OFFSET */
-const startDate=new Date(Date.now()-(3*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
+/* TIMER — START FROM 8 MONTHS */
+const startDate=new Date(Date.now()-(8*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
+
 function update(){
   let diff=Math.floor((Date.now()-startDate)/1000);
   const s=diff%60; diff=Math.floor(diff/60);
   const m=diff%60; diff=Math.floor(diff/60);
   const h=diff%24; diff=Math.floor(diff/24);
   const d=diff%30; const mo=Math.floor(diff/30);
+
   const txt=`${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
   together.innerText=txt;
   together2.innerText=txt;
 }
 setInterval(update,1000); update();
 
-/* PAGE CONTROL */
+/* PAGE CONTROL + MUSIC START */
 let current=1;
 function go(n){
   if(n===2 && pass.value!=="prinsu") return;
+
+  if(n===2){
+    document.getElementById("bgMusic").play().catch(()=>{});
+  }
+
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
