@@ -9,7 +9,7 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   font-family:system-ui,Arial,sans-serif;
   background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
   background-size:300% 300%;
@@ -25,6 +25,39 @@ body{
   100%{background-position:0% 50%}
 }
 
+/* LOVE + CATS EVERYWHERE */
+.corner{
+  position:fixed;
+  font-size:12px;
+  font-weight:800;
+  color:#ff3f8e;
+}
+.tl{top:6px;left:6px}
+.tr{top:6px;right:6px}
+.bl{bottom:6px;left:6px}
+.br{bottom:6px;right:6px}
+
+.cat{
+  position:fixed;
+  font-size:24px;
+}
+.cat.tl{top:28px;left:8px}
+.cat.tr{top:28px;right:8px}
+.cat.bl{bottom:28px;left:8px}
+.cat.br{bottom:28px;right:8px}
+
+/* FLOATING */
+.float{
+  position:fixed;
+  top:-10px;
+  animation:fall 6s linear infinite;
+  pointer-events:none;
+}
+@keyframes fall{
+  to{transform:translateY(120vh);opacity:0}
+}
+
+/* PAGES */
 .page{
   position:absolute;
   inset:0;
@@ -38,6 +71,8 @@ body{
 .page.active{display:flex}
 
 h1,h2,p{color:#ff3f8e}
+
+/* BUTTONS / INPUT */
 button{
   margin-top:20px;
   padding:14px 36px;
@@ -54,12 +89,26 @@ input{
   text-align:center;
 }
 
+/* HEART */
+.heart{
+  font-size:64px;
+  animation:beat 1s infinite;
+}
+@keyframes beat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.25)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
 /* TIMER */
 .timer{
   background:white;
   padding:14px 24px;
   border-radius:20px;
   font-weight:800;
+  margin-top:10px;
 }
 
 /* PHOTO SLIDER */
@@ -80,10 +129,10 @@ input{
   transition:.4s;
 }
 .slide.active{opacity:1}
-
 .caption{margin-top:12px;font-weight:600}
-.counter{margin-top:6px;font-weight:800}
+.counter{font-weight:800;margin-top:4px}
 
+/* HEART POP */
 .heart-pop{
   position:absolute;
   font-size:40px;
@@ -98,6 +147,17 @@ input{
 </head>
 
 <body>
+
+<!-- LOVE + CATS -->
+<div class="corner tl">I love Ritija 💗</div>
+<div class="corner tr">I love Ritija 💗</div>
+<div class="corner bl">I love Ritija 💗</div>
+<div class="corner br">I love Ritija 💗</div>
+
+<div class="cat tl">🐱</div>
+<div class="cat tr">🐱</div>
+<div class="cat bl">🐱</div>
+<div class="cat br">🐱</div>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -116,16 +176,52 @@ input{
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <p>We are together for 💞</p>
-  <div class="timer" id="together"></div>
+  <div class="heart">💗</div>
+  <p>This heart beats for every moment we shared.</p>
   <button onclick="go(4)">Next</button>
 </div>
 
-<!-- PAGE 4 : PHOTO SLIDER -->
+<!-- PAGE 4 -->
 <div class="page" id="p4">
+  <p>We are together for 💞</p>
+  <div class="timer" id="together"></div>
+  <button onclick="go(5)">Next</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <p>Total days together 🐾</p>
+  <div class="timer" id="days"></div>
+  <button onclick="go(6)">Next</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <p>Total weeks together 🐾</p>
+  <div class="timer" id="weeks"></div>
+  <button onclick="go(7)">Next</button>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+  <p>Total hours together 🐾</p>
+  <div class="timer" id="hours"></div>
+  <button onclick="go(8)">Next</button>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+  <p>Total seconds together 🐾</p>
+  <div class="timer" id="seconds"></div>
+  <button onclick="go(9)">Next</button>
+</div>
+
+<!-- PAGE 9 PHOTO -->
+<div class="page" id="p9">
   <h1>You are so beautiful 💗</h1>
 
   <div class="slider" onclick="heartPop(event)">
+    <!-- img1 … img16 -->
     <img src="img1.jpg" class="slide active" data-cap="You are so beautiful 💗">
     <img src="img2.jpg" class="slide" data-cap="I love your smile 🫶">
     <img src="img3.jpg" class="slide" data-cap="You make everything better 🌸">
@@ -148,27 +244,32 @@ input{
   <div class="counter" id="count">1 / 16</div>
 </div>
 
-<!-- PAGE 5 : FINAL PASSWORD -->
-<div class="page" id="p5">
+<!-- PAGE 10 FINAL QUESTION -->
+<div class="page" id="p10">
   <h1>One last question 💗</h1>
   <p>Who do I love the most?</p>
-  <input id="finalAns" placeholder="Type name">
+  <input id="finalAns">
   <button onclick="checkFinal()">Answer</button>
 </div>
 
-<!-- PAGE 6 : END -->
-<div class="page" id="p6">
+<!-- PAGE 11 END -->
+<div class="page" id="p11">
   <h1>Always Ritija 💗</h1>
-  <p>No matter the photo, the day, or the second — the answer is always you.</p>
+  <p>No matter the photo, day, hour or second — the answer is you.</p>
   <button onclick="go(1)">Replay 🔁</button>
 </div>
 
 <script>
-/* TIMER */
+/* START DATE (8 months approx) */
 const startDate=new Date(Date.now()-(8*30*24*60*60*1000));
+
 setInterval(()=>{
-  const d=Math.floor((Date.now()-startDate)/1000);
-  together.innerText=d+" seconds 💗";
+  const diff=Math.floor((Date.now()-startDate)/1000);
+  together.innerText=diff+" seconds 💗";
+  days.innerText=Math.floor(diff/86400)+" days 💗";
+  weeks.innerText=Math.floor(diff/(7*86400))+" weeks 💗";
+  hours.innerText=Math.floor(diff/3600)+" hours 💗";
+  seconds.innerText=diff+" seconds 💗";
 },1000);
 
 /* PAGE CONTROL */
@@ -180,18 +281,20 @@ function go(n){
   current=n;
 }
 
-/* SLIDER */
+/* PHOTO SLIDER */
 let i=0;
 const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
-  if(!document.getElementById("p4").classList.contains("active"))return;
-  if(i===slides.length-1)return;
+  if(!document.getElementById("p9").classList.contains("active"))return;
+  if(i===slides.length-1){
+    setTimeout(()=>go(10),1500);
+    return;
+  }
   slides[i].classList.remove("active");
   i++;
   slides[i].classList.add("active");
   cap.innerText=slides[i].dataset.cap;
   count.innerText=(i+1)+" / "+slides.length;
-  if(i===slides.length-1)setTimeout(()=>go(5),1500);
 },2500);
 
 /* HEART POP */
@@ -207,8 +310,18 @@ function heartPop(e){
 
 /* FINAL CHECK */
 function checkFinal(){
-  if(finalAns.value.toLowerCase()==="ritija")go(6);
+  if(finalAns.value.toLowerCase()==="ritija")go(11);
 }
+
+/* FLOATING */
+setInterval(()=>{
+  const e=document.createElement("div");
+  e.className="float";
+  e.innerHTML=["🐱","💗","✨","🌸","💕"][Math.floor(Math.random()*5)];
+  e.style.left=Math.random()*100+"vw";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6000);
+},350);
 </script>
 
 </body>
