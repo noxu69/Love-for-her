@@ -14,7 +14,7 @@ html,body{
   overflow:hidden;
 }
 
-/* PINK ANIMATED BACKGROUND */
+/* BACKGROUND */
 body{
   background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
   background-size:400% 400%;
@@ -37,22 +37,30 @@ body{
   text-align:center;
   padding:30px;
 }
-.active{display:flex;}
+.page.active{display:flex;}
 
 /* TEXT */
-h1,h2,p{
-  color:#ff3f8e;
-}
+h1,h2,p{color:#ff3f8e}
 p{
-  font-size:1.08rem;
+  font-size:1.05rem;
   line-height:1.8;
   max-width:650px;
+}
+
+/* INPUT */
+input{
+  padding:14px;
+  border-radius:25px;
+  border:none;
+  width:230px;
+  text-align:center;
+  font-size:1rem;
 }
 
 /* BUTTON */
 button{
   margin-top:25px;
-  padding:14px 38px;
+  padding:14px 36px;
   border:none;
   border-radius:40px;
   background:linear-gradient(135deg,#ff5fa2,#ff9acb);
@@ -61,18 +69,163 @@ button{
   box-shadow:0 10px 30px rgba(255,105,180,.6);
 }
 
-/* INPUT */
-input{
-  padding:13px;
-  border-radius:25px;
-  border:none;
-  width:230px;
-  text-align:center;
-  font-size:1rem;
+/* FLOATING EMOJIS */
+.float{
+  position:fixed;
+  top:-10px;
+  pointer-events:none;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh); opacity:0}
 }
 
-/* FLOATING CUTENESS */
-.float{
+/* HEARTBEAT */
+.heartbeat{
+  font-size:60px;
+  animation:beat 1s infinite;
+}
+@keyframes beat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.25)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* TIMER BOX */
+.timer{
+  margin-top:20px;
+  padding:15px 25px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.75);
+  color:#ff3f8e;
+  font-weight:bold;
+  box-shadow:0 8px 25px rgba(255,105,180,.4);
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h2>🔐 Secret</h2>
+  <p>Hint: <b>your fav person</b></p>
+  <input id="pass" type="password" placeholder="Enter password">
+  <button onclick="go(2)">Unlock 💗</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h1>Hey Ritija 🌸</h1>
+  <p>This little world exists because of you 💗</p>
+  <button onclick="go(3)">Next ✨</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="heartbeat">💗</div>
+  <p>This heart beats for every second together 🌸</p>
+  <button onclick="go(4)">Next 🥺</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <p>Time together 💞</p>
+  <div class="timer" id="together"></div>
+  <button onclick="go(5)">Next 💌</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h2>🎯 Next Milestone</h2>
+  <p>9 February 💕</p>
+  <div class="timer" id="milestone"></div>
+  <button onclick="go(6)">Last 💖</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <h1>Still counting… 💗</h1>
+  <div class="timer" id="together2"></div>
+  <button onclick="replay()">Replay 🔁</button>
+</div>
+
+<script>
+/* START FROM 3m 14d 5h 49m 30s */
+const startDate = new Date(Date.now() - (
+  (3*30*24*60*60 + 14*24*60*60 + 5*60*60 + 49*60 + 30) * 1000
+));
+
+const milestoneDate = new Date("2026-02-09T00:00:00");
+
+/* UPDATE TIMERS */
+function update(){
+  const now = new Date();
+
+  let diff = Math.floor((now - startDate)/1000);
+  const s = diff % 60;
+  diff = Math.floor(diff/60);
+  const m = diff % 60;
+  diff = Math.floor(diff/60);
+  const h = diff % 24;
+  diff = Math.floor(diff/24);
+  const d = diff % 30;
+  const mo = Math.floor(diff/30);
+
+  const txt = `${mo} months ${d} days ${h} hrs ${m} min ${s} sec 💗`;
+  document.getElementById("together").innerText = txt;
+  document.getElementById("together2").innerText = txt;
+
+  let mdiff = Math.floor((milestoneDate - now)/1000);
+  if(mdiff <= 0){
+    document.getElementById("milestone").innerText = "🎉 Milestone reached!";
+  }else{
+    const ms = mdiff % 60;
+    mdiff = Math.floor(mdiff/60);
+    const mm = mdiff % 60;
+    mdiff = Math.floor(mdiff/60);
+    const mh = mdiff % 24;
+    const md = Math.floor(mdiff/24);
+    document.getElementById("milestone").innerText =
+      `${md} days ${mh} hrs ${mm} min ${ms} sec 💗`;
+  }
+}
+setInterval(update,1000);
+update();
+
+/* PAGE CONTROL */
+let current = 1;
+function go(n){
+  if(n===2 && document.getElementById("pass").value!=="prinsu") return;
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p"+n).classList.add("active");
+  current = n;
+}
+
+function replay(){
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p1").classList.add("active");
+  current = 1;
+}
+
+/* FLOATING EMOJIS */
+function float(){
+  const e = document.createElement("div");
+  e.className = "float";
+  e.innerHTML = ["💗","✨","🌸","🎀","💕"][Math.floor(Math.random()*5)];
+  e.style.left = Math.random()*100+"vw";
+  e.style.fontSize = (Math.random()*12+18)+"px";
+  e.style.animationDuration = (Math.random()*3+4)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),7000);
+}
+setInterval(float,300);
+</script>
+
+</body>
+</html>.float{
   position:fixed;
   top:-10px;
   animation:fall linear infinite;
