@@ -30,32 +30,30 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CORNER TEXT */
+/* EVERYWHERE TEXT */
 .corner{
   position:fixed;
   font-size:12px;
   font-weight:700;
   color:#ff3f8e;
-  opacity:0.8;
+  opacity:.85;
 }
-.tl{top:10px;left:10px}
-.tr{top:10px;right:10px}
-.bl{bottom:10px;left:10px}
-.br{bottom:10px;right:10px}
+.tl{top:8px;left:8px}
+.tr{top:8px;right:8px}
+.bl{bottom:8px;left:8px}
+.br{bottom:8px;right:8px}
 
-/* SIDE STICKER */
-.sticker-side{
+.side{
   position:fixed;
-  right:0;
-  top:35%;
-  background:#ff5fa2;
-  color:white;
-  padding:10px 14px;
-  border-radius:20px 0 0 20px;
-  font-weight:700;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:13px;
+  font-weight:800;
+  color:#ff3f8e;
   writing-mode:vertical-rl;
-  box-shadow:0 8px 20px rgba(255,105,180,.5);
 }
+.left{left:5px}
+.right{right:5px}
 
 /* PAGES */
 .page{
@@ -73,13 +71,14 @@ body{
 h1,h2,p{color:#ff3f8e}
 
 p{
-  max-width:760px;
-  line-height:2;
+  max-width:780px;
+  line-height:2.1;
   font-size:1.1rem;
   margin:12px 0;
 }
 
-.type{min-height:160px}
+/* TYPE */
+.type{min-height:220px}
 
 /* INPUT */
 input{
@@ -93,8 +92,8 @@ input{
 
 /* BUTTON */
 button{
-  margin-top:24px;
-  padding:14px 38px;
+  margin-top:26px;
+  padding:14px 40px;
   border:none;
   border-radius:32px;
   background:linear-gradient(135deg,#ff5fa2,#ff9acb);
@@ -118,7 +117,7 @@ button:active{transform:scale(.96)}
 
 /* HEART */
 .heart{
-  font-size:68px;
+  font-size:70px;
   margin-bottom:10px;
   animation:beat 1s infinite;
 }
@@ -132,10 +131,10 @@ button:active{transform:scale(.96)}
 
 /* TIMER */
 .timer{
-  margin-top:18px;
-  padding:16px 26px;
+  margin-top:20px;
+  padding:18px 28px;
   background:rgba(255,255,255,0.9);
-  border-radius:26px;
+  border-radius:28px;
   font-weight:800;
 }
 </style>
@@ -143,18 +142,13 @@ button:active{transform:scale(.96)}
 
 <body>
 
-<!-- CORNERS -->
-<div class="corner tl">I love Ritija soo much 💗</div>
-<div class="corner tr">I love Ritija soo much 💗</div>
-<div class="corner bl">I love Ritija soo much 💗</div>
-<div class="corner br">I love Ritija soo much 💗</div>
-
-<div class="sticker-side">I 💗 Ritija</div>
-
-<!-- BACKGROUND MUSIC -->
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
+<!-- EVERYWHERE TEXT -->
+<div class="corner tl">I love Ritija 💗</div>
+<div class="corner tr">I love Ritija 💗</div>
+<div class="corner bl">I love Ritija 💗</div>
+<div class="corner br">I love Ritija 💗</div>
+<div class="side left">I love Ritija 💗</div>
+<div class="side right">I love Ritija 💗</div>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -187,46 +181,45 @@ button:active{transform:scale(.96)}
 <!-- PAGE 5 -->
 <div class="page" id="p5">
   <div class="type" id="t5"></div>
-  <div class="timer" id="together"></div>
   <button onclick="go(6)">Next 💌</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-  <h1>Still counting… 💗</h1>
   <div class="type" id="t6"></div>
+  <div class="timer" id="together"></div>
+  <button onclick="go(7)">Next 💖</button>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+  <h1>Still counting… 💗</h1>
+  <div class="type" id="t7"></div>
   <div class="timer" id="together2"></div>
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-/* TEXT */
+/* BIG PARAGRAPHS (≈100 words each) */
 const texts={
-  t2:[
-    "This page exists because love deserves effort.",
-    "Because some feelings deserve to be felt slowly.",
-    "And because being together matters more than anything 💗"
-  ],
-  t3:[
-    "This heart beats for us.",
-    "For every smile, every pause, every moment.",
-    "For everything that felt right 🌸"
-  ],
-  t4:[
-    "Not everything meaningful is loud.",
-    "Some love stays quiet and strong.",
-    "And that kind of love lasts 💞"
-  ],
-  t5:[
-    "Below is time together.",
-    "Not numbers — memories.",
-    "Seconds turning into something beautiful 💗"
-  ],
-  t6:[
-    "Time keeps moving.",
-    "Love keeps growing.",
-    "And I still choose you 🌸"
-  ]
+t2:[
+"This page exists because some feelings are too important to rush. It exists because being together is not about big moments alone, but about the quiet consistency of choosing each other again and again. It is about comfort that grows slowly, trust that builds without effort, and a sense of belonging that feels natural. This is not something that happens overnight. It happens in small moments, shared laughter, late thoughts, and simple presence. This page is a reflection of that calm, steady feeling that stays even when everything else changes."
+],
+t3:[
+"This heart represents every second we have spent together, even the ones that seemed ordinary at the time. It beats for the conversations that lasted longer than expected, for the silences that never felt awkward, and for the understanding that didn’t need explanation. It beats for the comfort of knowing someone is there, not because they have to be, but because they choose to be. That kind of connection is rare, and when it exists, it deserves to be held gently."
+],
+t4:[
+"Being together is not about perfection. It is about growth, patience, and learning each other in ways that feel natural. It is about showing up on days that feel heavy, and celebrating days that feel light. It is about finding peace in someone’s presence and knowing that even the simplest moments can feel meaningful when shared. This page is not trying to be impressive. It is trying to be honest about how togetherness quietly becomes something beautiful."
+],
+t5:[
+"Time is often measured in numbers, but togetherness is measured in feelings. It is measured in comfort, in trust, and in the way someone can make the world feel a little softer. Every second here represents moments that mattered, even when they seemed small. Over time, those seconds become memories, and those memories become part of who we are. This is what it means to truly be together, without rushing, without pressure."
+],
+t6:[
+"Below is time together, still moving, still growing. It does not reset, it does not forget. It keeps going forward, just like the feelings behind it. No matter how many times this page is opened or replayed, the meaning remains the same. Togetherness is not about counting days, but about valuing the time within them. And that value only grows stronger with time."
+],
+t7:[
+"Time will continue to move forward, but what truly matters is how it is spent. Being together is about choosing presence, understanding, and care. It is about knowing that no matter where life goes, the moments shared will always matter. This page ends here, but the feeling it represents does not. It continues quietly, steadily, and sincerely."
+]
 };
 
 /* TYPEWRITER */
@@ -237,7 +230,7 @@ function typeLines(el, lines){
     if(i<lines.length){
       if(j<=lines[i].length){
         el.innerHTML=lines.slice(0,i).join("<br><br>")+"<br><br>"+lines[i].slice(0,j++);
-        setTimeout(next,28);
+        setTimeout(next,18);
       }else{
         i++; j=0;
         setTimeout(next,600);
@@ -247,31 +240,24 @@ function typeLines(el, lines){
   next();
 }
 
-/* TIMER — START FROM 8 MONTHS */
+/* TIMER START FROM 8 MONTHS */
 const startDate=new Date(Date.now()-(8*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
-
 function update(){
   let diff=Math.floor((Date.now()-startDate)/1000);
   const s=diff%60; diff=Math.floor(diff/60);
   const m=diff%60; diff=Math.floor(diff/60);
   const h=diff%24; diff=Math.floor(diff/24);
   const d=diff%30; const mo=Math.floor(diff/30);
-
   const txt=`${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
   together.innerText=txt;
   together2.innerText=txt;
 }
 setInterval(update,1000); update();
 
-/* PAGE CONTROL + MUSIC START */
+/* PAGE CONTROL */
 let current=1;
 function go(n){
   if(n===2 && pass.value!=="prinsu") return;
-
-  if(n===2){
-    document.getElementById("bgMusic").play().catch(()=>{});
-  }
-
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
@@ -287,7 +273,7 @@ function replay(){
 setInterval(()=>{
   const e=document.createElement("div");
   e.className="float";
-  e.innerHTML=["💗","✨","🌸","🎀","💕","🐱"][Math.floor(Math.random()*6)];
+  e.innerHTML=["💗","✨","🌸","🎀","💕"][Math.floor(Math.random()*5)];
   e.style.left=Math.random()*100+"vw";
   document.body.appendChild(e);
   setTimeout(()=>e.remove(),6000);
