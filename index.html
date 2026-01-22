@@ -30,6 +30,26 @@ body{
   100%{background-position:0% 50%}
 }
 
+/* SIDE STICKER */
+.sticker{
+  position:fixed;
+  right:0;
+  top:40%;
+  background:#ff5fa2;
+  color:white;
+  padding:10px 14px;
+  border-radius:20px 0 0 20px;
+  font-weight:700;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  box-shadow:0 8px 20px rgba(255,105,180,.5);
+  animation:wiggle 3s ease-in-out infinite;
+}
+@keyframes wiggle{
+  0%,100%{transform:rotate(0)}
+  50%{transform:rotate(-2deg)}
+}
+
 /* PAGES */
 .page{
   position:absolute;
@@ -46,10 +66,15 @@ body{
 h1,h2,p{color:#ff3f8e}
 
 p{
-  max-width:700px;
+  max-width:720px;
   line-height:1.9;
   font-size:1.08rem;
-  margin:12px 0;
+  margin:10px 0;
+}
+
+/* TYPEWRITER */
+.type{
+  min-height:120px;
 }
 
 /* INPUT */
@@ -114,6 +139,8 @@ button:active{transform:scale(.96)}
 
 <body>
 
+<div class="sticker">I 💗 Ritija</div>
+
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
   <h2>🔐 Secret</h2>
@@ -125,107 +152,102 @@ button:active{transform:scale(.96)}
 <!-- PAGE 2 -->
 <div class="page" id="p2">
   <h1>Hey Ritija 🌸</h1>
-  <p>
-    This page exists because sometimes words feel too small,
-    and feelings deserve a little more space.
-    It exists because two people met,
-    stayed,
-    and quietly turned moments into memories.
-  </p>
-  <p>
-    Not every connection feels loud or dramatic.
-    Some feel calm.
-    Some feel safe.
-    Some feel like home without ever needing to explain why.
-    This page is about that kind of feeling 💗
-  </p>
+  <div class="type" id="t2"></div>
   <button onclick="go(3)">Next ✨</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
   <div class="heart">💗</div>
-  <p>
-    This heart beats for every second we’ve shared —
-    the conversations,
-    the silence,
-    the laughter,
-    and even the ordinary moments that became special
-    just because they were shared together.
-  </p>
-  <p>
-    Time doesn’t rush when it matters.
-    It stays.
-    It grows.
-    And it quietly turns into something meaningful 🌸
-  </p>
+  <div class="type" id="t3"></div>
   <button onclick="go(4)">Next 🥺</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <p>
-    Below is not just a timer.
-    It’s a collection of seconds that chose to stay,
-    minutes that felt comfortable,
-    hours that passed softly,
-    and days that slowly became memories.
-  </p>
-  <p>
-    No matter how many times this page is replayed,
-    this number keeps growing —
-    because time together never resets 💞
-  </p>
-
-  <div class="timer" id="together"></div>
-
+  <div class="type" id="t4"></div>
   <button onclick="go(5)">Next 💌</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
+  <div class="type" id="t5"></div>
+  <div class="timer" id="together"></div>
+  <button onclick="go(6)">Next 💞</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
   <h1>Still counting… 💗</h1>
-  <p>
-    Time keeps moving forward,
-    and with it,
-    feelings keep growing.
-  </p>
-  <p>
-    This isn’t a promise,
-    or a grand statement.
-    It’s simply a reminder —
-    that being together,
-    in all the quiet ways,
-    matters more than anything else 🌸
-  </p>
-
+  <div class="type" id="t6"></div>
   <div class="timer" id="together2"></div>
-
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-/* START FROM 3m 14d 5h 49m 30s */
+/* TYPEWRITER TEXT */
+const texts={
+  t2:[
+    "This page exists because sometimes feelings need more space.",
+    "Because some connections deserve to be felt slowly.",
+    "And because being together quietly matters the most 💗"
+  ],
+  t3:[
+    "This heart beats for every shared second.",
+    "For conversations, silence, and comfort.",
+    "For moments that felt like home 🌸"
+  ],
+  t4:[
+    "Not everything has to be loud to be meaningful.",
+    "Some things are special simply because they stay.",
+    "This is about that kind of togetherness 💞"
+  ],
+  t5:[
+    "Below is time — not just numbers.",
+    "Seconds that chose to stay.",
+    "Minutes that felt safe.",
+    "Time together, still growing 💗"
+  ],
+  t6:[
+    "Time keeps moving.",
+    "Feelings keep growing.",
+    "And being together still matters the most 🌸"
+  ]
+};
+
+function typeLines(el, lines){
+  let i=0, j=0;
+  el.innerHTML="";
+  function next(){
+    if(i<lines.length){
+      if(j<=lines[i].length){
+        el.innerHTML = lines.slice(0,i).join("<br>") +
+          "<br>" + lines[i].slice(0,j++);
+        setTimeout(next,30);
+      }else{
+        i++; j=0;
+        setTimeout(next,500);
+      }
+    }
+  }
+  next();
+}
+
+/* START TIMER FROM GIVEN OFFSET */
 const startDate = new Date(Date.now() - (
   (3*30*24*60*60 + 14*24*60*60 + 5*60*60 + 49*60 + 30) * 1000
 ));
 
 function update(){
-  const now = new Date();
+  let diff=Math.floor((Date.now()-startDate)/1000);
+  const s=diff%60; diff=Math.floor(diff/60);
+  const m=diff%60; diff=Math.floor(diff/60);
+  const h=diff%24; diff=Math.floor(diff/24);
+  const d=diff%30; const mo=Math.floor(diff/30);
 
-  let diff = Math.floor((now - startDate)/1000);
-  const s = diff % 60;
-  diff = Math.floor(diff/60);
-  const m = diff % 60;
-  diff = Math.floor(diff/60);
-  const h = diff % 24;
-  diff = Math.floor(diff/24);
-  const d = diff % 30;
-  const mo = Math.floor(diff/30);
-
-  const txt = `${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
-  together.innerText = txt;
-  together2.innerText = txt;
+  const txt=`${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
+  together.innerText=txt;
+  together2.innerText=txt;
 }
 setInterval(update,1000);
 update();
@@ -237,6 +259,7 @@ function go(n){
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
+  if(texts["t"+n]) typeLines(document.getElementById("t"+n), texts["t"+n]);
 }
 function replay(){
   document.getElementById("p"+current).classList.remove("active");
