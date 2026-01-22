@@ -6,13 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body{
   margin:0;
-  height:100vh;
-  font-family:Arial,sans-serif;
+  min-height:100dvh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
-  background-size:400% 400%;
-  animation:bg 12s ease infinite;
+  background-size:300% 300%;
+  animation:bg 10s ease infinite;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -34,15 +39,17 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:30px;
+  padding:28px;
 }
 .page.active{display:flex;}
 
 h1,h2,p{color:#ff3f8e}
 
 p{
-  max-width:600px;
-  line-height:1.7;
+  max-width:700px;
+  line-height:1.9;
+  font-size:1.08rem;
+  margin:12px 0;
 }
 
 /* INPUT */
@@ -52,35 +59,38 @@ input{
   border:none;
   width:220px;
   text-align:center;
+  font-size:1rem;
 }
 
 /* BUTTON */
 button{
-  margin-top:20px;
-  padding:14px 36px;
+  margin-top:22px;
+  padding:14px 38px;
   border:none;
-  border-radius:30px;
-  background:#ff5fa2;
+  border-radius:32px;
+  background:linear-gradient(135deg,#ff5fa2,#ff9acb);
   color:white;
-  font-size:16px;
-  box-shadow:0 8px 25px rgba(255,105,180,.5);
+  font-size:1.05rem;
+  font-weight:600;
+  box-shadow:0 10px 28px rgba(255,105,180,.45);
 }
+button:active{transform:scale(.96)}
 
 /* FLOATING */
 .float{
   position:fixed;
   top:-10px;
-  animation:fall 5s linear infinite;
+  animation:fall 6s linear infinite;
   pointer-events:none;
 }
-
 @keyframes fall{
   to{transform:translateY(120vh);opacity:0}
 }
 
-/* HEARTBEAT */
+/* HEART */
 .heart{
-  font-size:60px;
+  font-size:64px;
+  margin-bottom:10px;
   animation:beat 1s infinite;
 }
 @keyframes beat{
@@ -93,11 +103,11 @@ button{
 
 /* TIMER */
 .timer{
-  margin-top:15px;
-  padding:12px 20px;
-  background:rgba(255,255,255,0.75);
-  border-radius:20px;
-  font-weight:bold;
+  margin-top:18px;
+  padding:16px 24px;
+  background:rgba(255,255,255,0.85);
+  border-radius:24px;
+  font-weight:700;
 }
 </style>
 </head>
@@ -116,8 +126,18 @@ button{
 <div class="page" id="p2">
   <h1>Hey Ritija 🌸</h1>
   <p>
-    This page exists because two people stayed.
-    And every second since then has mattered 💗
+    This page exists because sometimes words feel too small,
+    and feelings deserve a little more space.
+    It exists because two people met,
+    stayed,
+    and quietly turned moments into memories.
+  </p>
+  <p>
+    Not every connection feels loud or dramatic.
+    Some feel calm.
+    Some feel safe.
+    Some feel like home without ever needing to explain why.
+    This page is about that kind of feeling 💗
   </p>
   <button onclick="go(3)">Next ✨</button>
 </div>
@@ -126,43 +146,70 @@ button{
 <div class="page" id="p3">
   <div class="heart">💗</div>
   <p>
-    This heart beats for every second
-    we’ve spent together 🌸
+    This heart beats for every second we’ve shared —
+    the conversations,
+    the silence,
+    the laughter,
+    and even the ordinary moments that became special
+    just because they were shared together.
+  </p>
+  <p>
+    Time doesn’t rush when it matters.
+    It stays.
+    It grows.
+    And it quietly turns into something meaningful 🌸
   </p>
   <button onclick="go(4)">Next 🥺</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <p>Time together 💞</p>
+  <p>
+    Below is not just a timer.
+    It’s a collection of seconds that chose to stay,
+    minutes that felt comfortable,
+    hours that passed softly,
+    and days that slowly became memories.
+  </p>
+  <p>
+    No matter how many times this page is replayed,
+    this number keeps growing —
+    because time together never resets 💞
+  </p>
+
   <div class="timer" id="together"></div>
+
   <button onclick="go(5)">Next 💌</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-  <h2>🎯 Next Milestone</h2>
-  <p>9 February 💕</p>
-  <div class="timer" id="milestone"></div>
-  <button onclick="go(6)">Last 💖</button>
-</div>
-
-<!-- PAGE 6 -->
-<div class="page" id="p6">
   <h1>Still counting… 💗</h1>
+  <p>
+    Time keeps moving forward,
+    and with it,
+    feelings keep growing.
+  </p>
+  <p>
+    This isn’t a promise,
+    or a grand statement.
+    It’s simply a reminder —
+    that being together,
+    in all the quiet ways,
+    matters more than anything else 🌸
+  </p>
+
   <div class="timer" id="together2"></div>
+
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-/* START FROM 8m 13d 5h 51m 4s */
+/* START FROM 3m 14d 5h 49m 30s */
 const startDate = new Date(Date.now() - (
-  (8*30*24*60*60 + 13*24*60*60 + 5*60*60 + 51*60 + 4) * 1000
+  (3*30*24*60*60 + 14*24*60*60 + 5*60*60 + 49*60 + 30) * 1000
 ));
 
-const milestoneDate = new Date("2026-02-09T00:00:00");
-
-/* UPDATE TIMERS */
 function update(){
   const now = new Date();
 
@@ -176,23 +223,9 @@ function update(){
   const d = diff % 30;
   const mo = Math.floor(diff/30);
 
-  const txt = `${mo} months ${d} days ${h} hrs ${m} min ${s} sec 💗`;
-  document.getElementById("together").innerText = txt;
-  document.getElementById("together2").innerText = txt;
-
-  let md = Math.floor((milestoneDate - now)/1000);
-  if(md <= 0){
-    document.getElementById("milestone").innerText = "🎉 Milestone reached!";
-  }else{
-    const ms = md % 60;
-    md = Math.floor(md/60);
-    const mm = md % 60;
-    md = Math.floor(md/60);
-    const mh = md % 24;
-    const mdays = Math.floor(md/24);
-    document.getElementById("milestone").innerText =
-      `${mdays} days ${mh} hrs ${mm} min ${ms} sec 💗`;
-  }
+  const txt = `${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
+  together.innerText = txt;
+  together2.innerText = txt;
 }
 setInterval(update,1000);
 update();
@@ -200,12 +233,11 @@ update();
 /* PAGE CONTROL */
 let current=1;
 function go(n){
-  if(n===2 && document.getElementById("pass").value!=="prinsu") return;
+  if(n===2 && pass.value!=="prinsu") return;
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
 }
-
 function replay(){
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p1").classList.add("active");
@@ -219,8 +251,8 @@ setInterval(()=>{
   e.innerHTML=["💗","✨","🌸","🎀","💕"][Math.floor(Math.random()*5)];
   e.style.left=Math.random()*100+"vw";
   document.body.appendChild(e);
-  setTimeout(()=>e.remove(),5000);
-},300);
+  setTimeout(()=>e.remove(),6000);
+},350);
 </script>
 
 </body>
