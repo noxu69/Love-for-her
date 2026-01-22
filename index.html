@@ -11,57 +11,67 @@ body{
   height:100vh;
   font-family:'Segoe UI',sans-serif;
   background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
-  background-size  100% { transform: scale(1); opacity: 1; }
+  background-size:400% 400%;
+  animation:bg 10s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:white;
 }
-
-h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-
-p {
-  font-size: 1.15rem;
-  line-height: 1.7;
+.card{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(12px);
+  padding:30px;
+  border-radius:30px;
+  max-width:380px;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,0.4);
+  animation:pop 1.2s ease;
 }
-
-button {
-  margin-top: 22px;
-  padding: 14px 30px;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 40px;
-  background: white;
-  color: #ff4f7a;
-  cursor: pointer;
-  animation: bounce 1.5s infinite;
+@keyframes pop{
+  from{transform:scale(0.4);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
-
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+input{
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  width:80%;
+  text-align:center;
+  font-size:1rem;
 }
-
-button:hover {
-  transform: scale(1.1);
+button{
+  margin-top:15px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff4f7a;
+  font-size:1.05rem;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
 }
-
-.heart, .sparkle {
-  position: fixed;
-  top: -10px;
-  animation: fall linear infinite;
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
-
-.heart {
-  font-size: 22px;
+p{
+  font-size:1.1rem;
+  line-height:1.7;
 }
-
-.sparkle {
-  font-size: 16px;
+.heart,.sparkle,.confetti{
+  position:fixed;
+  top:-10px;
+  animation:fall linear infinite;
 }
-
-@keyframes fall {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(110vh); opacity: 0; }
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
 </style>
 </head>
@@ -69,10 +79,69 @@ button:hover {
 <body>
 
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">
 </audio>
 
-<div class="card" id="box">
+<div class="card" id="screen">
+  <h1>🔒 Secret Page</h1>
+  <p>Hint: <b>your fav person</b> 💭</p>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br>
+  <button onclick="unlock()">Unlock 💖</button>
+</div>
+
+<script>
+function unlock(){
+  const p=document.getElementById("pass").value;
+  if(p==="prinsu"){
+    explode();
+    document.getElementById("screen").innerHTML=`
+      <h1>Ritija 💗</h1>
+      <p>
+        I hope you never forget how deeply special you are.  
+        Some people leave marks on a heart without even trying,  
+        and you did that just by being you. 🌸  
+        <br><br>
+        The way you exist, the way you smile, the way your presence  
+        makes everything feel calmer and brighter — it all matters.  
+        You matter. More than words, more than moments, more than you realize. ✨  
+        <br><br>
+        If life ever feels heavy, remember that somewhere  
+        there is a heart that feels lighter because of you.  
+        Someone who appreciates every little thing about you,  
+        who feels lucky just knowing you exist. 💕  
+        <br><br>
+        This page is small, but the feeling behind it is huge.  
+        You are cherished, valued, and loved in ways that go beyond explanation.  
+        Always stay exactly the way you are. 💌
+      </p>
+      <button onclick="explode()">More Love 🎉</button>
+    `;
+  }else{
+    alert("Wrong password 😅");
+  }
+}
+
+function spawn(){
+  const icons=["❤️","✨","🎉","💖","🌸"];
+  const el=document.createElement("div");
+  el.className=Math.random()>0.5?"heart":"confetti";
+  el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+  el.style.left=Math.random()*100+"vw";
+  el.style.animationDuration=Math.random()*3+3+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),6000);
+}
+
+function explode(){
+  for(let i=0;i<60;i++) spawn();
+}
+
+setInterval(spawn,300);
+</script>
+
+</body>
+</html><div class="card" id="box">
   <h1>Ritija 💖</h1>
   <p>
     I don’t know how to put everything into words,  
