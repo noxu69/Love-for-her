@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Ritija 💖</title>
+<title>Secret for You 💗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -10,68 +10,74 @@ body{
   margin:0;
   height:100vh;
   font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
-  background-size:400% 400%;
-  animation:bg 10s ease infinite;
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
-  color:white;
 }
-@keyframes bg{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+
 .card{
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(12px);
-  padding:30px;
+  background:rgba(255,255,255,0.9);
+  padding:28px;
   border-radius:30px;
   max-width:380px;
   text-align:center;
-  box-shadow:0 30px 60px rgba(0,0,0,0.4);
-  animation:pop 1.2s ease;
+  box-shadow:0 25px 60px rgba(0,0,0,0.3);
+  animation:pop 1s ease;
 }
+
 @keyframes pop{
-  from{transform:scale(0.4);opacity:0}
+  from{transform:scale(0.5);opacity:0}
   to{transform:scale(1);opacity:1}
 }
+
+h1{
+  color:#ff5fa2;
+  font-size:2.2rem;
+}
+
+p{
+  color:#444;
+  font-size:1.05rem;
+  line-height:1.7;
+}
+
 input{
   padding:12px;
   border-radius:20px;
-  border:none;
+  border:2px solid #ffb3d9;
   width:80%;
   text-align:center;
   font-size:1rem;
 }
+
 button{
   margin-top:15px;
   padding:12px 30px;
   border:none;
   border-radius:30px;
-  background:white;
-  color:#ff4f7a;
+  background:#ff5fa2;
+  color:white;
   font-size:1.05rem;
   cursor:pointer;
-  animation:bounce 1.5s infinite;
+  animation:bounce 1.4s infinite;
 }
+
 @keyframes bounce{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+  50%{transform:translateY(-7px)}
 }
-p{
-  font-size:1.1rem;
-  line-height:1.7;
-}
-.heart,.sparkle,.confetti{
+
+.heart,.sparkle,.cat{
   position:fixed;
   top:-10px;
   animation:fall linear infinite;
+  pointer-events:none;
 }
+
 @keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+  to{transform:translateY(110vh);opacity:0}
 }
 </style>
 </head>
@@ -79,15 +85,15 @@ p{
 <body>
 
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3">
 </audio>
 
 <div class="card" id="screen">
-  <h1>🔒 Secret Page</h1>
+  <h1>🔐 Secret Page</h1>
   <p>Hint: <b>your fav person</b> 💭</p>
   <input type="password" id="pass" placeholder="Enter password">
   <br>
-  <button onclick="unlock()">Unlock 💖</button>
+  <button onclick="unlock()">Unlock 💗</button>
 </div>
 
 <script>
@@ -96,36 +102,44 @@ function unlock(){
   if(p==="prinsu"){
     explode();
     document.getElementById("screen").innerHTML=`
-      <h1>Ritija 💗</h1>
+      <h1>Hi Ritija 🥺💗</h1>
+      <img src="https://i.imgur.com/4AiXzf8.png" width="120"><br><br>
+
       <p>
-        I hope you never forget how deeply special you are.  
-        Some people leave marks on a heart without even trying,  
-        and you did that just by being you. 🌸  
+        I made this little world just for you ✨  
+        Somewhere between cute cats 🐱, sparkles 🌸  
+        and soft anime vibes 🎮  
+        I wanted you to feel how special you are.  
         <br><br>
-        The way you exist, the way you smile, the way your presence  
-        makes everything feel calmer and brighter — it all matters.  
-        You matter. More than words, more than moments, more than you realize. ✨  
+        If this page makes you smile even a little,  
+        then it has done exactly what it was meant to do 💖  
+        Because you deserve softness, warmth, and  
+        a thousand tiny happy moments every day.
         <br><br>
-        If life ever feels heavy, remember that somewhere  
-        there is a heart that feels lighter because of you.  
-        Someone who appreciates every little thing about you,  
-        who feels lucky just knowing you exist. 💕  
-        <br><br>
-        This page is small, but the feeling behind it is huge.  
-        You are cherished, valued, and loved in ways that go beyond explanation.  
-        Always stay exactly the way you are. 💌
+        You are precious. You are loved.  
+        And this page exists because of you 💌
       </p>
-      <button onclick="explode()">More Love 🎉</button>
+
+      <button onclick="more()">Click for MORE CUTENESS 😭</button>
     `;
   }else{
-    alert("Wrong password 😅");
+    alert("Nope 😼 try again");
   }
 }
 
+function more(){
+  explode();
+  document.getElementById("screen").innerHTML+=`
+    <p style="color:#ff5fa2;font-weight:bold;">
+      You unlocked the cat army 🐱🐱🐱💗
+    </p>
+  `;
+}
+
 function spawn(){
-  const icons=["❤️","✨","🎉","💖","🌸"];
+  const icons=["❤️","✨","🌸","🐱","💖"];
   const el=document.createElement("div");
-  el.className=Math.random()>0.5?"heart":"confetti";
+  el.className=Math.random()>0.7?"cat":"heart";
   el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
   el.style.left=Math.random()*100+"vw";
   el.style.animationDuration=Math.random()*3+3+"s";
@@ -134,49 +148,10 @@ function spawn(){
 }
 
 function explode(){
-  for(let i=0;i<60;i++) spawn();
+  for(let i=0;i<50;i++) spawn();
 }
 
 setInterval(spawn,300);
-</script>
-
-</body>
-</html><div class="card" id="box">
-  <h1>Ritija 💖</h1>
-  <p>
-    I don’t know how to put everything into words,  
-    but you genuinely make my life brighter 🌸  
-    Your smile feels like comfort,  
-    your presence feels like home 🏡  
-    Every little moment with you matters more than you know ✨
-  </p>
-
-  <button onclick="surprise()">Open Surprise 🎁</button>
-</div>
-
-<script>
-function createHeart() {
-  const el = document.createElement("div");
-  el.className = Math.random() > 0.5 ? "heart" : "sparkle";
-  el.innerHTML = el.className === "heart" ? "❤️" : "✨";
-  el.style.left = Math.random() * 100 + "vw";
-  el.style.animationDuration = (Math.random() * 3 + 3) + "s";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 6000);
-}
-setInterval(createHeart, 250);
-
-function surprise() {
-  document.getElementById("box").innerHTML = `
-    <h1>I love you so much Ritija ❤️</h1>
-    <p>
-      You’re not just someone special,  
-      you’re my favorite thought every day 💕  
-      I feel lucky, calm, and happy because of you 🌈  
-      No matter what, you’ll always have a very special place in my heart 💌
-    </p>
-  `;
-}
 </script>
 
 </body>
