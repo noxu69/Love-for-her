@@ -235,13 +235,20 @@ t5:"Every week, every day, every hour adds up to something beautiful when it is 
 /* TIME */
 const startDate=new Date(Date.now()-(8*30*24*60*60*1000));
 setInterval(()=>{
-  const d=Math.floor((Date.now()-startDate)/1000);
-  weeks.innerText=Math.floor(d/(7*86400));
-  days.innerText=Math.floor(d/86400);
-  hours.innerText=Math.floor(d/3600);
-  minutes.innerText=Math.floor(d/60);
-  seconds.innerText=d;
-},1000);
+  const d = Math.floor((Date.now() - startDate) / 1000);
+
+  const w = Math.floor(d / (7 * 86400));
+  const da = Math.floor(d / 86400);
+  const h = Math.floor(d / 3600);
+  const m = Math.floor(d / 60);
+  const s = d;
+
+  weeks.innerText   = `${w} weeks spent together 🖤`;
+  days.innerText    = `${da} days spent together 🖤`;
+  hours.innerText   = `${h} hours spent together 🖤`;
+  minutes.innerText = `${m} minutes spent together 🖤`;
+  seconds.innerText = `${s} seconds spent together 🖤`;
+}, 1000);
 
 /* PAGE CONTROL */
 let current=1;
