@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Ritija 💗</title>
+<title>For Ritija 💗🐱</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -20,94 +20,119 @@ body{
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
 /* LOVE EVERYWHERE */
-.corner{position:fixed;font-size:12px;font-weight:800;color:#ff3f8e;opacity:.9}
-.tl{top:8px;left:8px}.tr{top:8px;right:8px}.bl{bottom:8px;left:8px}.br{bottom:8px;right:8px}
-.side{position:fixed;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-weight:900;color:#ff3f8e}
-.left{left:4px}.right{right:4px}
+.love{
+  position:fixed;font-size:12px;font-weight:900;color:#ff3f8e;opacity:.9;
+}
+.tl{top:6px;left:6px}.tr{top:6px;right:6px}
+.bl{bottom:6px;left:6px}.br{bottom:6px;right:6px}
+.sideL,.sideR{
+  top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;
+}
+.sideL{left:4px}.sideR{right:4px}
+
+/* CATS EVERYWHERE */
+.catC{position:fixed;font-size:28px;opacity:.95}
+.c1{top:40px;left:12px}.c2{top:40px;right:12px}
+.c3{bottom:40px;left:12px}.c4{bottom:40px;right:12px}
 
 /* PAGES */
-.page{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px}
+.page{
+  position:absolute;inset:0;display:none;
+  flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:28px
+}
 .page.active{display:flex}
+
 h1,h2,p{color:#ff3f8e}
-p{max-width:800px;line-height:2.1;font-size:1.12rem;margin:12px 0}
-.type{min-height:240px}
+p{
+  max-width:820px;
+  line-height:2.2;
+  font-size:1.12rem;
+  margin:14px 0;
+}
+.type{min-height:260px}
 
 /* INPUT + BUTTON */
-input{padding:14px;border-radius:25px;border:none;width:220px;text-align:center;font-size:1rem}
+input{
+  padding:14px;border-radius:25px;border:none;width:220px;
+  text-align:center;font-size:1rem
+}
 button{
-  margin-top:22px;padding:14px 40px;border:none;border-radius:32px;
+  margin-top:22px;padding:14px 42px;border:none;border-radius:34px;
   background:linear-gradient(135deg,#ff5fa2,#ff9acb);
-  color:white;font-size:1.05rem;font-weight:700;
+  color:white;font-size:1.05rem;font-weight:800;
   box-shadow:0 10px 28px rgba(255,105,180,.45)
 }
 button:active{transform:scale(.96)}
+.catBtn{background:linear-gradient(135deg,#ff8fc3,#ffd1ea)}
 
-/* CAT BUTTON */
-.cat-btn{
-  background:linear-gradient(135deg,#ff85b3,#ffb3d9);
-  margin-top:16px;
+/* FLOATING CATS */
+.float{
+  position:fixed;top:-20px;
+  animation:fall 6s linear infinite;
+  pointer-events:none
 }
-
-/* FLOATING */
-.float{position:fixed;top:-20px;animation:fall 6s linear infinite;pointer-events:none}
 @keyframes fall{to{transform:translateY(120vh);opacity:0}}
-
-/* HEART */
-.heart{font-size:72px;animation:beat 1s infinite}
-@keyframes beat{0%{transform:scale(1)}25%{transform:scale(1.25)}40%{transform:scale(1)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
 
 /* TIMER */
 .timer{
-  margin-top:20px;padding:18px 28px;background:rgba(255,255,255,.9);
-  border-radius:28px;font-weight:900
+  margin-top:22px;padding:20px 30px;
+  background:rgba(255,255,255,.95);
+  border-radius:30px;font-weight:900
 }
-.big{font-size:1.4rem}
+.big{font-size:1.5rem}
 </style>
 </head>
 
 <body>
 
-<!-- LOVE EVERYWHERE -->
-<div class="corner tl">I love Ritija 💗</div>
-<div class="corner tr">I love Ritija 💗</div>
-<div class="corner bl">I love Ritija 💗</div>
-<div class="corner br">I love Ritija 💗</div>
-<div class="side left">I love Ritija 💗</div>
-<div class="side right">I love Ritija 💗</div>
+<!-- LOVE TEXT -->
+<div class="love tl">I love Ritija 💗</div>
+<div class="love tr">I love Ritija 💗</div>
+<div class="love bl">I love Ritija 💗</div>
+<div class="love br">I love Ritija 💗</div>
+<div class="love sideL">I love Ritija 💗</div>
+<div class="love sideR">I love Ritija 💗</div>
+
+<!-- CATS -->
+<div class="catC c1">🐱</div>
+<div class="catC c2">🐱</div>
+<div class="catC c3">🐱</div>
+<div class="catC c4">🐱</div>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
   <h2>🔐 Secret</h2>
   <p>Hint: <b>your fav person</b></p>
   <input type="password" id="pass">
-  <button onclick="go(2)">Unlock 💗</button>
+  <button onclick="go(2)">Unlock 💗🐱</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-  <h1>Hey Ritija 🌸</h1>
+  <h1>Hey Ritija 🐱💗</h1>
   <div class="type" id="t2"></div>
-  <button onclick="go(3)">Next ✨</button>
+  <button onclick="go(3)">Next 🐾</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <div class="heart">💗</div>
   <div class="type" id="t3"></div>
-  <button onclick="go(4)">Next 🥺</button>
+  <button onclick="go(4)">Next 🐱</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
   <div class="type" id="t4"></div>
-  <button onclick="go(5)">Next 💞</button>
+  <button onclick="go(5)">Next 💗</button>
 </div>
 
 <!-- PAGE 5 (TOGETHER) -->
 <div class="page" id="p5">
-  <p>We are together for 💞</p>
+  <p>We are together for 🐾💞</p>
   <div class="timer" id="together"></div>
-  <button class="cat-btn" onclick="dropCats()">🐱 Tap for Cats 🐱</button>
+  <button class="catBtn" onclick="catExplosion()">CAT EXPLOSION 🐱🐱🐱</button>
   <button onclick="go(6)">Next 🐾</button>
 </div>
 
@@ -115,56 +140,54 @@ button:active{transform:scale(.96)}
 <div class="page" id="p6">
   <p>Total days together 🐱</p>
   <div class="timer big" id="days"></div>
-  <button class="cat-btn" onclick="dropCats()">More Cats 🐱</button>
+  <button class="catBtn" onclick="catExplosion()">MORE CATS 🐱</button>
   <button onclick="go(7)">Next 🐾</button>
 </div>
 
-<!-- PAGE 7 (WEEKS) -->
+<!-- PAGE 7 (END) -->
 <div class="page" id="p7">
-  <p>Total weeks together 🐱</p>
-  <div class="timer big" id="weeks"></div>
-  <button class="cat-btn" onclick="dropCats()">Cats Again 🐱</button>
-  <button onclick="go(8)">Next 🐾</button>
-</div>
-
-<!-- PAGE 8 (HOURS + END) -->
-<div class="page" id="p8">
-  <p>Total hours together 🐱</p>
-  <div class="timer big" id="hours"></div>
-  <button class="cat-btn" onclick="dropCats()">CAT ATTACK 🐱</button>
+  <h1>Always 🐱💗</h1>
+  <div class="type" id="t7"></div>
+  <div class="timer big" id="seconds"></div>
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-/* BIG PARAGRAPHS */
+/* HUGE LOVE PARAGRAPHS */
 const texts={
-t2:["This page exists because some feelings deserve patience. Being together is not about rushing moments or counting achievements. It is about choosing presence, comfort, and understanding every single day. It is about feeling calm in someone’s presence and knowing that even silence can feel full."],
-t3:["This heart represents every shared moment, even the ones that felt small. It beats for conversations that mattered, laughter that felt effortless, and moments of quiet comfort. Real connection is built slowly, and that is what makes it strong."],
-t4:["Togetherness is not loud. It does not demand attention. It stays, it grows, and it becomes a part of who we are. This page is not meant to impress. It is meant to be honest about how being together can feel safe, warm, and real."]
+t2:[
+"I love you so much, Ritija. Not in a dramatic way, not in a loud way, but in a calm and constant way that stays even when everything else feels confusing. I love you in the small moments, in the quiet conversations, and in the comfort of just knowing you exist. Being with you feels safe, natural, and right, and that feeling is something I would protect with everything I have."
+],
+t3:[
+"You have no idea how much you mean to me. I would do anything for your happiness, your peace, and your smile. Even on days when things feel heavy, thinking about you makes everything feel lighter. Loving you is not a choice I struggle with, it is something that happens effortlessly, every single day."
+],
+t4:[
+"If love was measured by effort, patience, and care, then mine for you would have no limit. I want to be there for you in every way I can, through every phase, every emotion, and every version of you. I love you not just for who you are now, but for who you are becoming, and I’m grateful for every moment we share."
+],
+t7:[
+"No matter how much time passes, how many cats fall from the sky, or how many times this page is replayed, one thing will always stay the same. I love you, Ritija. Completely, honestly, and endlessly. 🐱💗"
+]
 };
 
 /* TYPEWRITER */
 function typeLines(el, lines){
-  let i=0,j=0; el.innerHTML="";
+  let j=0; el.innerHTML="";
   (function next(){
-    if(i<lines.length){
-      if(j<=lines[i].length){
-        el.innerHTML=lines[i].slice(0,j++);
-        setTimeout(next,16);
-      }
+    if(j<=lines[0].length){
+      el.innerHTML=lines[0].slice(0,j++);
+      setTimeout(next,16);
     }
   })();
 }
 
-/* TIMER OFFSET (8 MONTHS) */
+/* TIMER (8 MONTH OFFSET) */
 const startDate=new Date(Date.now()-(8*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
 function update(){
-  const diffSec=Math.floor((Date.now()-startDate)/1000);
+  const diff=Math.floor((Date.now()-startDate)/1000);
   together.innerText=
-    `${Math.floor(diffSec/(30*86400))} months ${Math.floor(diffSec/86400)%30} days ${Math.floor(diffSec/3600)%24} hours ${Math.floor(diffSec/60)%60} minutes ${diffSec%60} seconds 💗`;
-  days.innerText=`${Math.floor(diffSec/86400)} days 💗`;
-  weeks.innerText=`${Math.floor(diffSec/(7*86400))} weeks 💗`;
-  hours.innerText=`${Math.floor(diffSec/3600)} hours 💗`;
+    `${Math.floor(diff/(30*86400))} months ${Math.floor(diff/86400)%30} days ${Math.floor(diff/3600)%24} hours ${Math.floor(diff/60)%60} minutes ${diff%60} seconds 💗`;
+  days.innerText=`${Math.floor(diff/86400)} days 💗`;
+  seconds.innerText=`${diff} seconds 💗`;
 }
 setInterval(update,1000); update();
 
@@ -183,18 +206,31 @@ function replay(){
   current=1;
 }
 
-/* CAT DROP FUNCTION */
-function dropCats(){
-  for(let i=0;i<12;i++){
+/* CAT EXPLOSION */
+function catExplosion(){
+  for(let i=0;i<20;i++){
     const e=document.createElement("div");
     e.className="float";
-    e.innerHTML=["🐱","🐾","💗","✨"][Math.floor(Math.random()*4)];
+    e.innerHTML=["🐱","🐾","💗","✨","😺"][Math.floor(Math.random()*5)];
     e.style.left=Math.random()*100+"vw";
-    e.style.fontSize=(Math.random()*14+22)+"px";
+    e.style.fontSize=(Math.random()*18+24)+"px";
     document.body.appendChild(e);
     setTimeout(()=>e.remove(),6000);
   }
 }
+
+/* TAP ANYWHERE = MINI CATS */
+document.body.addEventListener("click",e=>{
+  if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT")return;
+  const c=document.createElement("div");
+  c.style.position="fixed";
+  c.style.left=e.clientX+"px";
+  c.style.top=e.clientY+"px";
+  c.style.fontSize="22px";
+  c.innerHTML="🐱";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),1200);
+});
 </script>
 
 </body>
