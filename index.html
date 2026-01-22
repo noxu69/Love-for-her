@@ -19,7 +19,10 @@ body{
 }
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-.love{position:fixed;font-size:12px;font-weight:900;color:#ff3f8e;opacity:.9}
+.love{
+  position:fixed;font-size:12px;font-weight:900;
+  color:#ff3f8e;opacity:.95
+}
 .tl{top:6px;left:6px}.tr{top:6px;right:6px}
 .bl{bottom:6px;left:6px}.br{bottom:6px;right:6px}
 .sideL,.sideR{top:50%;writing-mode:vertical-rl;transform:translateY(-50%)}
@@ -33,8 +36,8 @@ body{
 .page.active{display:flex}
 
 h1,h2,p{color:#ff3f8e}
-p{max-width:820px;line-height:2.2;font-size:1.12rem;margin:14px 0}
-.type{min-height:240px}
+p{max-width:860px;line-height:2.25;font-size:1.13rem;margin:14px 0}
+.type{min-height:260px}
 
 input{
   padding:14px;border-radius:25px;border:none;width:220px;
@@ -67,17 +70,18 @@ button:active{transform:scale(.96)}
 
 <body>
 
+<!-- RITIJA EVERYWHERE -->
 <div class="love tl">I love Ritija 💗</div>
 <div class="love tr">I love Ritija 💗</div>
 <div class="love bl">I love Ritija 💗</div>
 <div class="love br">I love Ritija 💗</div>
-<div class="love sideL">I love Ritija 💗</div>
-<div class="love sideR">I love Ritija 💗</div>
+<div class="love sideL">Ritija 💗 Ritija 💗 Ritija</div>
+<div class="love sideR">I love Ritija endlessly 💗</div>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <h2>🔐 Secret</h2>
-  <input id="pass">
+  <h2>🔐 Only for Ritija</h2>
+  <input id="pass" placeholder="Enter password">
   <button onclick="go(2)">Unlock 💗</button>
 </div>
 
@@ -88,80 +92,73 @@ button:active{transform:scale(.96)}
   <button onclick="go(3)">Next 🐾</button>
 </div>
 
-<!-- WHY YOU MATTER -->
+<!-- PAGE 3 -->
 <div class="page" id="p3">
   <div class="type" id="t3"></div>
   <button onclick="go(4)">Next 💗</button>
 </div>
 
-<!-- PROMISE -->
+<!-- PAGE 4 -->
 <div class="page" id="p4">
   <div class="type" id="t4"></div>
   <button onclick="go(5)">Next 🌸</button>
 </div>
 
-<!-- TOGETHER -->
+<!-- PAGE 5 -->
 <div class="page" id="p5">
-  <p>We are together for 🐾💞</p>
-  <div class="timer" id="together"></div>
-  <button class="catBtn" onclick="catRain()">CAT RAIN 🐱</button>
-  <button onclick="go(6)">Next</button>
+  <div class="type" id="t5"></div>
+  <button onclick="go(6)">Next 🐱</button>
 </div>
 
-<!-- DAYS -->
+<!-- PAGE 6 -->
 <div class="page" id="p6">
-  <p>Total days together 🐱</p>
-  <div class="timer big" id="days"></div>
+  <p>Ritija and me, together for 💞</p>
+  <div class="timer" id="together"></div>
+  <button class="catBtn" onclick="catRain()">CAT RAIN FOR RITIJA 🐱</button>
   <button onclick="go(7)">Next</button>
 </div>
 
-<!-- SECRET PAGE -->
+<!-- PAGE 7 -->
 <div class="page" id="p7">
-  <h2>🔐 One more secret</h2>
-  <input id="pass2" placeholder="Who do I love most?">
-  <button onclick="goSecret()">Unlock 💗</button>
-</div>
-
-<!-- FUTURE NOTE -->
-<div class="page" id="p8">
-  <div class="type" id="t8"></div>
-  <button onclick="go(9)">Next</button>
-</div>
-
-<!-- GROWTH -->
-<div class="page" id="p9">
-  <div class="type" id="t9"></div>
-  <button onclick="go(10)">Next</button>
-</div>
-
-<!-- FINAL -->
-<div class="page" id="p10">
-  <h1>I choose you.</h1>
-  <p>Always. 🐱💗</p>
+  <div class="type" id="t7"></div>
   <div class="timer big" id="seconds"></div>
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
 const texts={
-t2:["I love you so much, Ritija. In the quiet moments, in the loud ones, in ways words can’t fully explain. You feel like home."],
-t3:["You matter when you smile. You matter when you’re quiet. You matter even on days you don’t feel your best. You always matter to me."],
-t4:["I can’t promise perfection. But I promise effort. I promise care. I promise choosing you, every single day."],
-t8:["If you’re reading this in the future, I hope you know that I still love you just as much, if not more."],
-t9:["We won’t always be the same people. But I hope we grow together, learn together, and choose each other again and again."]
+t2:[
+"Ritija, this page exists only because of you. Because loving Ritija feels natural, calm, and right. Every thought here, every word, every tiny detail was made while thinking about Ritija and the way she makes the world feel softer."
+],
+t3:[
+"Ritija, loving you is not something I ever question. I love you in your happy moments, in your quiet moments, and even on days when you don’t see your own worth. I would do anything to protect your peace, your smile, and your heart."
+],
+t4:[
+"If Ritija ever doubts herself, I hope she remembers this: she is deeply loved, endlessly valued, and incredibly important. I don’t love a perfect idea of Ritija. I love the real Ritija, exactly as she is."
+],
+t5:[
+"No matter where life goes or how much time passes, I choose Ritija. Not once, not sometimes, but always. Loving Ritija is something I would do again and again without hesitation."
+],
+t7:[
+"Ritija, this time keeps moving, but my feelings don’t change. I love you more than words, more than time, and more than anything I could ever explain. Always you. 💗"
+]
 };
 
 function typeLines(el, arr){
   let j=0; el.innerHTML="";
-  (function t(){ if(j<=arr[0].length){ el.innerHTML=arr[0].slice(0,j++); setTimeout(t,16);} })();
+  (function t(){
+    if(j<=arr[0].length){
+      el.innerHTML=arr[0].slice(0,j++);
+      setTimeout(t,16);
+    }
+  })();
 }
 
 const startDate=new Date(Date.now()-(8*30*24*60*60)*1000);
 function update(){
   const d=Math.floor((Date.now()-startDate)/1000);
-  together.innerText=`${Math.floor(d/86400)} days ${Math.floor(d/3600)%24} hrs ${Math.floor(d/60)%60} min ${d%60} sec`;
-  days.innerText=`${Math.floor(d/86400)} days`;
-  seconds.innerText=`${d} seconds`;
+  together.innerText=`${Math.floor(d/86400)} days ${Math.floor(d/3600)%24} hrs ${Math.floor(d/60)%60} min ${d%60} sec 💗`;
+  seconds.innerText=`${d} seconds with Ritija 💗`;
 }
 setInterval(update,1000); update();
 
@@ -173,34 +170,19 @@ function go(n){
   current=n;
   if(texts["t"+n]) typeLines(document.getElementById("t"+n),texts["t"+n]);
 }
-function goSecret(){
-  if(pass2.value.toLowerCase()!=="ritija") return;
-  go(8);
-}
 function replay(){go(1)}
 
 function catRain(){
   for(let i=0;i<25;i++){
     const e=document.createElement("div");
     e.className="float";
-    e.innerHTML=["🐱","🐾","💗","😺"][Math.floor(Math.random()*4)];
+    e.innerHTML=["🐱","🐾","💗","😺","Ritija"][Math.floor(Math.random()*5)];
     e.style.left=Math.random()*100+"vw";
     e.style.fontSize=(Math.random()*20+24)+"px";
     document.body.appendChild(e);
     setTimeout(()=>e.remove(),6000);
   }
 }
-
-document.body.addEventListener("click",e=>{
-  if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT")return;
-  const c=document.createElement("div");
-  c.style.position="fixed";
-  c.style.left=e.clientX+"px";
-  c.style.top=e.clientY+"px";
-  c.innerHTML="🐱";
-  document.body.appendChild(c);
-  setTimeout(()=>c.remove(),1000);
-});
 </script>
 
 </body>
