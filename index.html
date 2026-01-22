@@ -6,10 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,46 +22,64 @@ body {
   color: white;
 }
 
-.container {
-  background: rgba(255,255,255,0.18);
+.card {
+  background: rgba(255,255,255,0.22);
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(0,0,0,0.3);
-  max-width: 350px;
+  max-width: 360px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  animation: pop 1.2s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   margin-bottom: 10px;
 }
 
 p {
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 
 button {
-  margin-top: 20px;
-  padding: 12px 25px;
+  margin-top: 22px;
+  padding: 14px 30px;
   font-size: 1.1rem;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   background: white;
   color: #ff4f7a;
   cursor: pointer;
-  transition: 0.3s;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 button:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
+}
+
+.heart, .sparkle {
+  position: fixed;
+  top: -10px;
+  animation: fall linear infinite;
 }
 
 .heart {
-  position: fixed;
-  top: -10px;
-  font-size: 24px;
-  animation: fall linear infinite;
+  font-size: 22px;
+}
+
+.sparkle {
+  font-size: 16px;
 }
 
 @keyframes fall {
@@ -70,40 +92,42 @@ button:hover {
 <body>
 
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container" id="mainBox">
-  <h1>Ritija ❤️</h1>
+<div class="card" id="box">
+  <h1>Ritija 💖</h1>
   <p>
-    I just want you to know<br>
-    you mean the world to me 🌸<br>
-    Every smile of yours makes my day brighter ✨
+    I don’t know how to put everything into words,  
+    but you genuinely make my life brighter 🌸  
+    Your smile feels like comfort,  
+    your presence feels like home 🏡  
+    Every little moment with you matters more than you know ✨
   </p>
 
-  <button onclick="surprise()">Tap for Surprise 🎁</button>
+  <button onclick="surprise()">Open Surprise 🎁</button>
 </div>
 
 <script>
 function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 5000);
+  const el = document.createElement("div");
+  el.className = Math.random() > 0.5 ? "heart" : "sparkle";
+  el.innerHTML = el.className === "heart" ? "❤️" : "✨";
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 6000);
 }
-setInterval(createHeart, 300);
+setInterval(createHeart, 250);
 
 function surprise() {
-  document.getElementById("mainBox").innerHTML = `
-    <h1>I love you sooo much Ritija ❤️</h1>
+  document.getElementById("box").innerHTML = `
+    <h1>I love you so much Ritija ❤️</h1>
     <p>
-      You are my favorite person 💕<br>
-      My happiness, my peace, my smile 🌈<br>
-      I’m really lucky to have you 💖
+      You’re not just someone special,  
+      you’re my favorite thought every day 💕  
+      I feel lucky, calm, and happy because of you 🌈  
+      No matter what, you’ll always have a very special place in my heart 💌
     </p>
   `;
 }
