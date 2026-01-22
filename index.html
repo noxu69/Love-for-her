@@ -6,11 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
+*{box-sizing:border-box}
 body{
   margin:0;
-  min-height:100vh;
+  height:100vh;
   font-family:system-ui,Arial,sans-serif;
   background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
   background-size:300% 300%;
@@ -20,27 +19,12 @@ body{
   align-items:center;
   overflow:hidden;
 }
-
 @keyframes bg{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-/* LOVE EVERYWHERE */
-.corner{
-  position:fixed;
-  font-size:12px;
-  font-weight:800;
-  color:#ff3f8e;
-  opacity:.9;
-}
-.tl{top:8px;left:8px}
-.tr{top:8px;right:8px}
-.bl{bottom:8px;left:8px}
-.br{bottom:8px;right:8px}
-
-/* PAGES */
 .page{
   position:absolute;
   inset:0;
@@ -49,62 +33,33 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:28px;
+  padding:24px;
 }
 .page.active{display:flex}
 
 h1,h2,p{color:#ff3f8e}
-
-p{
-  max-width:780px;
-  line-height:2;
-  font-size:1.05rem;
-  margin:12px 0;
-}
-
-/* BUTTON */
 button{
-  margin-top:24px;
-  padding:14px 38px;
+  margin-top:20px;
+  padding:14px 36px;
   border:none;
-  border-radius:32px;
-  background:linear-gradient(135deg,#ff5fa2,#ff9acb);
+  border-radius:30px;
+  background:#ff5fa2;
   color:white;
-  font-size:1.05rem;
   font-weight:700;
-  box-shadow:0 10px 28px rgba(255,105,180,.45);
 }
-button:active{transform:scale(.96)}
-
 input{
-  padding:14px;
-  border-radius:25px;
+  padding:12px;
+  border-radius:20px;
   border:none;
-  width:240px;
   text-align:center;
-  font-size:1rem;
-}
-
-/* HEART */
-.heart{
-  font-size:70px;
-  animation:beat 1s infinite;
-}
-@keyframes beat{
-  0%{transform:scale(1)}
-  25%{transform:scale(1.25)}
-  40%{transform:scale(1)}
-  60%{transform:scale(1.2)}
-  100%{transform:scale(1)}
 }
 
 /* TIMER */
 .timer{
-  margin-top:18px;
-  padding:16px 26px;
-  background:rgba(255,255,255,.9);
-  border-radius:26px;
-  font-weight:900;
+  background:white;
+  padding:14px 24px;
+  border-radius:20px;
+  font-weight:800;
 }
 
 /* PHOTO SLIDER */
@@ -113,9 +68,7 @@ input{
   max-width:320px;
   height:420px;
   position:relative;
-  margin:18px auto;
 }
-
 .slide{
   position:absolute;
   inset:0;
@@ -123,40 +76,28 @@ input{
   height:100%;
   object-fit:cover;
   border-radius:26px;
-  box-shadow:0 15px 40px rgba(255,105,180,.45);
   opacity:0;
   transition:.4s;
 }
-
 .slide.active{opacity:1}
 
-.caption{
-  margin-top:14px;
-  font-size:1.05rem;
-  color:#ff3f8e;
-  font-weight:600;
-}
+.caption{margin-top:12px;font-weight:600}
+.counter{margin-top:6px;font-weight:800}
 
-/* FLOATING */
-.float{
-  position:fixed;
-  top:-10px;
-  animation:fall 6s linear infinite;
-  pointer-events:none;
+.heart-pop{
+  position:absolute;
+  font-size:40px;
+  animation:pop .8s forwards;
 }
-@keyframes fall{
-  to{transform:translateY(120vh);opacity:0}
+@keyframes pop{
+  0%{transform:scale(.3);opacity:0}
+  50%{opacity:1}
+  100%{transform:scale(1.5);opacity:0}
 }
 </style>
 </head>
 
 <body>
-
-<!-- LOVE EVERYWHERE -->
-<div class="corner tl">I love Ritija 💗</div>
-<div class="corner tr">I love Ritija 💗</div>
-<div class="corner bl">I love Ritija 💗</div>
-<div class="corner br">I love Ritija 💗</div>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -169,80 +110,66 @@ input{
 <!-- PAGE 2 -->
 <div class="page" id="p2">
   <h1>Hey Ritija 🌸</h1>
-  <p>
-    This page exists because some feelings deserve more than words.
-    They deserve time, care, and a place where they can stay quietly.
-  </p>
-  <button onclick="go(3)">Next ✨</button>
+  <p>This page exists because being together matters.</p>
+  <button onclick="go(3)">Next</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <div class="heart">💗</div>
-  <p>
-    This heart beats for every moment we shared together.
-    Even the small ones mattered.
-  </p>
-  <button onclick="go(4)">Next 🥺</button>
-</div>
-
-<!-- PAGE 4 -->
-<div class="page" id="p4">
   <p>We are together for 💞</p>
   <div class="timer" id="together"></div>
-  <button onclick="go(5)">Next 🐱</button>
+  <button onclick="go(4)">Next</button>
 </div>
 
-<!-- PAGE 5 -->
-<div class="page" id="p5">
+<!-- PAGE 4 : PHOTO SLIDER -->
+<div class="page" id="p4">
   <h1>You are so beautiful 💗</h1>
 
-  <div class="slider">
+  <div class="slider" onclick="heartPop(event)">
     <img src="img1.jpg" class="slide active" data-cap="You are so beautiful 💗">
     <img src="img2.jpg" class="slide" data-cap="I love your smile 🫶">
     <img src="img3.jpg" class="slide" data-cap="You make everything better 🌸">
     <img src="img4.jpg" class="slide" data-cap="I fall for you every day 💞">
-    <img src="img5.jpg" class="slide" data-cap="You are my favorite person 🐱">
-    <img src="img6.jpg" class="slide" data-cap="Your eyes are my safe place 💗">
-    <img src="img7.jpg" class="slide" data-cap="You look perfect just like this ✨">
-    <img src="img8.jpg" class="slide" data-cap="Every picture of you makes me smile 🌸">
-    <img src="img9.jpg" class="slide" data-cap="You are effortlessly beautiful 💞">
-    <img src="img10.jpg" class="slide" data-cap="I love you more than words 💗">
-    <img src="img11.jpg" class="slide" data-cap="Being with you feels right 🐱">
-    <img src="img12.jpg" class="slide" data-cap="You make my heart calm 💕">
-    <img src="img13.jpg" class="slide" data-cap="I adore everything about you 🌸">
-    <img src="img14.jpg" class="slide" data-cap="You are my happy place 💗">
-    <img src="img15.jpg" class="slide" data-cap="I choose you every time 🫶">
-    <img src="img16.jpg" class="slide" data-cap="Always you. Always Ritija 💞">
+    <img src="img5.jpg" class="slide" data-cap="You are my favourite 🐱">
+    <img src="img6.jpg" class="slide" data-cap="Your eyes feel safe 💗">
+    <img src="img7.jpg" class="slide" data-cap="You look perfect ✨">
+    <img src="img8.jpg" class="slide" data-cap="You make me smile 🌸">
+    <img src="img9.jpg" class="slide" data-cap="Effortlessly beautiful 💞">
+    <img src="img10.jpg" class="slide" data-cap="I love you 💗">
+    <img src="img11.jpg" class="slide" data-cap="You feel like home 🐱">
+    <img src="img12.jpg" class="slide" data-cap="My calm 💕">
+    <img src="img13.jpg" class="slide" data-cap="I adore you 🌸">
+    <img src="img14.jpg" class="slide" data-cap="My happy place 💗">
+    <img src="img15.jpg" class="slide" data-cap="I choose you 🫶">
+    <img src="img16.jpg" class="slide" data-cap="Always you.">
   </div>
 
-  <p class="caption" id="photoCaption">You are so beautiful 💗</p>
-  <p style="opacity:.7">Swipe left or right 🐱</p>
+  <div class="caption" id="cap">You are so beautiful 💗</div>
+  <div class="counter" id="count">1 / 16</div>
 </div>
 
-<!-- FINAL PAGE -->
+<!-- PAGE 5 : FINAL PASSWORD -->
+<div class="page" id="p5">
+  <h1>One last question 💗</h1>
+  <p>Who do I love the most?</p>
+  <input id="finalAns" placeholder="Type name">
+  <button onclick="checkFinal()">Answer</button>
+</div>
+
+<!-- PAGE 6 : END -->
 <div class="page" id="p6">
-  <h1>Always you 💗</h1>
-  <p>
-    No matter the day, the hour, or the second —
-    the answer will always be the same.
-  </p>
+  <h1>Always Ritija 💗</h1>
+  <p>No matter the photo, the day, or the second — the answer is always you.</p>
   <button onclick="go(1)">Replay 🔁</button>
 </div>
 
 <script>
-/* TIMER (8 MONTHS OFFSET) */
-const startDate=new Date(Date.now()-(8*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
-function update(){
-  let d=Math.floor((Date.now()-startDate)/1000);
-  together.innerText=
-    Math.floor(d/(30*86400))+" months "+
-    Math.floor(d/86400)%30+" days "+
-    Math.floor(d/3600)%24+" hours "+
-    Math.floor(d/60)%60+" minutes "+
-    d%60+" seconds 💗";
-}
-setInterval(update,1000);update();
+/* TIMER */
+const startDate=new Date(Date.now()-(8*30*24*60*60*1000));
+setInterval(()=>{
+  const d=Math.floor((Date.now()-startDate)/1000);
+  together.innerText=d+" seconds 💗";
+},1000);
 
 /* PAGE CONTROL */
 let current=1;
@@ -253,30 +180,35 @@ function go(n){
   current=n;
 }
 
-/* PHOTO SLIDER */
-let currentSlide=0,startX=0;
-function slides(){return document.querySelectorAll(".slide")}
-document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-document.addEventListener("touchend",e=>{
-  if(!document.getElementById("p5").classList.contains("active"))return;
-  const dx=e.changedTouches[0].clientX-startX;
-  if(Math.abs(dx)>60){
-    slides()[currentSlide].classList.remove("active");
-    currentSlide=dx<0?(currentSlide+1)%slides().length:(currentSlide-1+slides().length)%slides().length;
-    slides()[currentSlide].classList.add("active");
-    photoCaption.innerText=slides()[currentSlide].dataset.cap;
-  }
-});
-
-/* FLOATING */
+/* SLIDER */
+let i=0;
+const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
-  const e=document.createElement("div");
-  e.className="float";
-  e.innerHTML=["💗","🐱","✨","🌸","💕"][Math.floor(Math.random()*5)];
-  e.style.left=Math.random()*100+"vw";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6000);
-},350);
+  if(!document.getElementById("p4").classList.contains("active"))return;
+  if(i===slides.length-1)return;
+  slides[i].classList.remove("active");
+  i++;
+  slides[i].classList.add("active");
+  cap.innerText=slides[i].dataset.cap;
+  count.innerText=(i+1)+" / "+slides.length;
+  if(i===slides.length-1)setTimeout(()=>go(5),1500);
+},2500);
+
+/* HEART POP */
+function heartPop(e){
+  const h=document.createElement("div");
+  h.className="heart-pop";
+  h.innerText="💗";
+  h.style.left=e.offsetX+"px";
+  h.style.top=e.offsetY+"px";
+  e.currentTarget.appendChild(h);
+  setTimeout(()=>h.remove(),800);
+}
+
+/* FINAL CHECK */
+function checkFinal(){
+  if(finalAns.value.toLowerCase()==="ritija")go(6);
+}
 </script>
 
 </body>
