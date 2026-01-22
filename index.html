@@ -14,7 +14,7 @@ html,body{
   overflow:hidden;
 }
 
-/* BACKGROUND */
+/* PINK ANIMATED BACKGROUND */
 body{
   background:linear-gradient(-45deg,#ff7eb3,#ffd1ea,#ff9acb,#ffe6f2);
   background-size:400% 400%;
@@ -71,8 +71,201 @@ input{
   font-size:1rem;
 }
 
-/* FLOATING */
+/* FLOATING CUTENESS */
 .float{
+  position:fixed;
+  top:-10px;
+  animation:fall linear infinite;
+  pointer-events:none;
+}
+@keyframes fall{
+  to{transform:translateY(120vh); opacity:0}
+}
+
+/* HEARTBEAT */
+.heartbeat{
+  font-size:60px;
+  margin:15px 0;
+  animation:beat 1s infinite;
+}
+@keyframes beat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.25)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* TIMER BOX */
+.timer{
+  margin-top:15px;
+  padding:15px 25px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.75);
+  color:#ff3f8e;
+  font-weight:bold;
+  box-shadow:0 8px 25px rgba(255,105,180,.4);
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h2>🔐 Secret</h2>
+  <p>Hint: <b>your fav person</b></p>
+  <input id="pass" type="password" placeholder="Enter password">
+  <button onclick="go(2)">Unlock 💗</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h1>Hey Ritija 🌸</h1>
+  <p>
+    This little world exists because two people
+    chose each other and stayed 💗
+  </p>
+  <button onclick="go(3)">Next ✨</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="heartbeat">💗</div>
+  <p>
+    This heart beats for every second
+    we’ve spent together.
+    Quietly. Constantly. Honestly 🌸
+  </p>
+  <button onclick="go(4)">Next 🥺</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <p>
+    Time doesn’t rush when it’s meaningful.
+    It stays.
+    It grows.
+    And it turns into memories 💞
+  </p>
+
+  <div class="timer" id="togetherTime"></div>
+
+  <button onclick="go(5)">Next 💌</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h2>🎯 Next Milestone</h2>
+  <p><b>8 February 💕</b></p>
+
+  <div class="timer" id="milestone"></div>
+
+  <button onclick="go(6)">One last thing 💖</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <h1>Still counting… 💗</h1>
+  <p>
+    Time keeps moving.
+    Feelings keep growing ✨
+  </p>
+
+  <div class="timer" id="togetherTime2"></div>
+
+  <button onclick="replay()">Replay 🔁</button>
+</div>
+
+<script>
+/* 🔑 CHANGE THIS TO YOUR REAL START DATE */
+const startDate = new Date(Date.now() - (
+  (3*30*24*60*60 + 14*24*60*60 + 5*60*60 + 49*60 + 30) * 1000
+));
+
+/* 🎯 MILESTONE DATE (8 FEB) */
+const milestoneDate = new Date("2026-02-09T00:00:00");
+
+/* TIME TOGETHER */
+function updateTogether(){
+  const now = new Date();
+  let diff = Math.floor((now - startDate)/1000);
+
+  const sec = diff % 60;
+  diff = Math.floor(diff/60);
+  const min = diff % 60;
+  diff = Math.floor(diff/60);
+  const hrs = diff % 24;
+  diff = Math.floor(diff/24);
+  const days = diff % 30;
+  const months = Math.floor(diff/30);
+
+  const text = `${months} months ${days} days ${hrs} hours ${min} min ${sec} sec 💗`;
+  document.getElementById("togetherTime").innerText = text;
+  document.getElementById("togetherTime2").innerText = text;
+}
+
+/* MILESTONE COUNTDOWN */
+function updateMilestone(){
+  const now = new Date();
+  let diff = Math.floor((milestoneDate - now)/1000);
+
+  if(diff <= 0){
+    document.getElementById("milestone").innerText = "🎉 Milestone reached! 💕";
+    return;
+  }
+
+  const sec = diff % 60;
+  diff = Math.floor(diff/60);
+  const min = diff % 60;
+  diff = Math.floor(diff/60);
+  const hrs = diff % 24;
+  const days = Math.floor(diff/24);
+
+  document.getElementById("milestone").innerText =
+    `${days} days ${hrs} hours ${min} min ${sec} sec to go 💗`;
+}
+
+setInterval(()=>{
+  updateTogether();
+  updateMilestone();
+},1000);
+
+updateTogether();
+updateMilestone();
+
+/* PAGE CONTROL */
+let current=1;
+function go(n){
+  if(n===2 && document.getElementById("pass").value!=="prinsu") return;
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p"+n).classList.add("active");
+  current=n;
+}
+
+/* REPLAY */
+function replay(){
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p1").classList.add("active");
+  current=1;
+}
+
+/* FLOATING EMOJIS */
+function float(){
+  const e=document.createElement("div");
+  e.className="float";
+  e.innerHTML=["💗","✨","🌸","🎀","💕"][Math.floor(Math.random()*5)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.fontSize=(Math.random()*12+18)+"px";
+  e.style.animationDuration=(Math.random()*3+4)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),7000);
+}
+setInterval(float,250);
+</script>
+
+</body>
+</html>.float{
   position:fixed;
   top:-10px;
   animation:fall linear infinite;
