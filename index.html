@@ -12,29 +12,199 @@ html,body{
   height:100%;
   overflow:hidden;
   font-family:'Segoe UI',sans-serif;
-  background:black;
 }
 
-/* PASSWORD SCREEN */
-#lock{
+/* COMMON */
+.page{
   position:fixed;
   inset:0;
-  background:linear-gradient(135deg,#ff7eb3,#ffb3d9);
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
+  text-align:center;
+  transition:opacity 0.6s ease;
+}
+.active{display:flex;}
+
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff5fa2;
   color:white;
-  z-index:10;
+  font-size:1rem;
+  margin-top:20px;
 }
 
-.lock-box{
-  text-align:center;
+/* PAGE 1 – PASSWORD */
+#page1{
+  background:linear-gradient(135deg,#ff7eb3,#ffd1ea);
+  color:white;
 }
 input{
   padding:12px;
   border-radius:25px;
   border:none;
+  text-align:center;
   width:220px;
+}
+
+/* PAGE 2 – VIDEO REEL */
+#page2{
+  background:black;
+}
+video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.overlay{
+  position:absolute;
+  bottom:20%;
+  width:100%;
+  color:white;
+  font-size:1.4rem;
+  padding:0 20px;
+  text-shadow:0 0 20px hotpink;
+  animation:fadeUp 2s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* PAGE 3 – CUTE ANIMATION */
+#page3{
+  background:linear-gradient(135deg,#ffd1ea,#ff9acb);
+  color:#ff4fa3;
+}
+.cat{
+  font-size:60px;
+  animation:bounce 1.2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+/* PAGE 4 – EMOTIONAL */
+#page4{
+  background:linear-gradient(135deg,#ffe6f2,#ffc1dd);
+  color:#ff4fa3;
+  padding:30px;
+}
+
+/* PAGE 5 – FINAL */
+#page5{
+  background:linear-gradient(135deg,#ff9acb,#ff5fa2);
+  color:white;
+}
+
+/* FLOATING HEARTS */
+.float{
+  position:fixed;
+  top:-10px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh); opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h2>🔐 Secret</h2>
+  <p>Hint: <b>your fav person</b></p>
+  <input id="pass" type="password" placeholder="Enter password">
+  <button onclick="goPage2()">Unlock 💗</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <!-- upload your video as cute.mp4 -->
+  <video autoplay loop muted playsinline>
+    <source src="cute.mp4" type="video/mp4">
+  </video>
+  <div class="overlay" id="text">You feel like comfort 💗</div>
+  <button onclick="goPage3()">Next ✨</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <div class="cat">🐱</div>
+  <h2>LOOK AT THIS CUTIE 😭</h2>
+  <p>Because you deserve cute things</p>
+  <button onclick="goPage4()">More 🥺</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <p>
+    Some people feel like a safe place.  
+    Like peace, warmth, and comfort all at once 🌸  
+    This page exists to remind you of that feeling 💗
+  </p>
+  <button onclick="goPage5()">Last 💌</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+  <h1>I’m glad you exist 💗</h1>
+  <p>You really make the world softer</p>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function goPage2(){
+  if(document.getElementById("pass").value==="prinsu"){
+    show("page2");
+    cycleText();
+  }
+}
+
+function goPage3(){show("page3")}
+function goPage4(){show("page4")}
+function goPage5(){show("page5")}
+
+/* TEXT CYCLE ON VIDEO */
+const lines=[
+  "You feel like comfort 💗",
+  "Like peace in human form ✨",
+  "Like home 🌸",
+  "This is for you 💌"
+];
+let i=0;
+function cycleText(){
+  setInterval(()=>{
+    i=(i+1)%lines.length;
+    document.getElementById("text").innerText=lines[i];
+  },2500);
+}
+
+/* FLOATING EMOJIS */
+function float(){
+  const el=document.createElement("div");
+  el.className="float";
+  el.innerHTML=["💗","✨","🐱","🌸"][Math.floor(Math.random()*4)];
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=(Math.random()*10+16)+"px";
+  el.style.animationDuration=(Math.random()*3+3)+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),6000);
+}
+setInterval(float,300);
+</script>
+
+</body>
+</html>  width:220px;
   text-align:center;
   font-size:1rem;
 }
