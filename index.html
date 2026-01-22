@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You 💗</title>
+<title>Secret World 💗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box}
 body{
   margin:0;
   height:100vh;
   font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(135deg,#fbc2eb,#a6c1ee,#fdfbfb);
-  background-size:300% 300%;
-  animation:bg 10s ease infinite;
+  background:linear-gradient(-45deg,#fbc2eb,#a6c1ee,#fde2ff,#e0c3fc);
+  background-size:500% 500%;
+  animation:bg 14s ease infinite;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -23,51 +24,49 @@ body{
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
+
 .card{
-  background:rgba(255,255,255,0.95);
-  padding:26px;
-  border-radius:30px;
-  max-width:390px;
+  background:rgba(255,255,255,0.97);
+  padding:28px;
+  border-radius:36px;
+  max-width:420px;
   text-align:center;
-  box-shadow:0 30px 70px rgba(0,0,0,0.35);
-  animation:pop 1s ease;
+  box-shadow:0 40px 120px rgba(0,0,0,0.35);
+  animation:pop 1.3s ease;
 }
 @keyframes pop{
-  from{transform:scale(0.4);opacity:0}
+  from{transform:scale(0.25);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-h1{
-  color:#ff5fa2;
-  font-size:2.3rem;
-}
-p{
-  color:#444;
-  font-size:1.05rem;
-  line-height:1.7;
-}
+
+h1{color:#ff5fa2;font-size:2.5rem}
+p{color:#444;font-size:1.05rem;line-height:1.8}
+
 input{
-  padding:12px;
-  border-radius:20px;
+  padding:13px;
+  border-radius:22px;
   border:2px solid #ffb3d9;
-  width:80%;
+  width:85%;
   font-size:1rem;
   text-align:center;
 }
+
 button{
-  margin-top:15px;
-  padding:12px 30px;
+  margin-top:16px;
+  padding:13px 38px;
   border:none;
-  border-radius:30px;
+  border-radius:40px;
   background:#ff5fa2;
   color:white;
   font-size:1.05rem;
   cursor:pointer;
-  animation:bounce 1.3s infinite;
+  animation:bounce 1.4s infinite;
 }
 @keyframes bounce{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+  50%{transform:translateY(-10px)}
 }
+
 .fall{
   position:fixed;
   top:-10px;
@@ -75,7 +74,25 @@ button{
   animation:fall linear infinite;
 }
 @keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+  to{transform:translateY(120vh) rotate(360deg);opacity:0}
+}
+
+.popup{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:white;
+  color:#ff5fa2;
+  padding:12px 18px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  animation:pop 0.5s ease;
+  z-index:99;
+}
+.catBtn{
+  background:#fff0f7;
+  color:#ff5fa2;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -83,11 +100,11 @@ button{
 <body>
 
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3">
 </audio>
 
 <div class="card" id="screen">
-  <h1>🔐 Secret Page</h1>
+  <h1>🔐 Secret World</h1>
   <p>Hint: <b>your fav person</b> 💭</p>
   <input type="password" id="pass" placeholder="Enter password">
   <br>
@@ -95,61 +112,91 @@ button{
 </div>
 
 <script>
+const emojis=["🐱","😺","💖","✨","🌸","⭐","🎀","🦋","❤️"];
+let clicks=0;
+
 function unlock(){
-  const p=document.getElementById("pass").value;
-  if(p==="prinsu"){
-    explosion();
-    document.getElementById("screen").innerHTML=`
-      <h1>Ritija 🥺💗</h1>
-      <img src="https://i.imgur.com/4AiXzf8.png" width="120">
-      <p>
-        Welcome to a tiny world made only for you ✨  
-        A place full of soft colors, sparkles, cats 🐱  
-        and gentle feelings that remind you how special you are.
-        <br><br>
-        If life ever feels loud, I hope this page feels quiet and warm 🌸  
-        Like sitting in a cozy corner of a fantasy world,  
-        with cute cats around and magic in the air 🎮✨
-        <br><br>
-        You don’t have to do anything to deserve this.  
-        Your existence alone is enough 💖  
-        And somewhere out there is a heart that smiles  
-        just thinking about you 💌
-      </p>
-      <button onclick="stageTwo()">Moreeee 😭</button>
-    `;
-  } else {
-    alert("Wrong password 😼 try again");
+  if(document.getElementById("pass").value==="prinsu"){
+    explode(120);
+    mainPage();
+    notify("You unlocked something special 💗");
+  }else{
+    notify("Wrong password 😼");
   }
 }
 
-function stageTwo(){
-  explosion();
-  document.getElementById("screen").innerHTML+=`
-    <p style="color:#ff5fa2;font-weight:bold;">
-      YOU UNLOCKED MAX CUTENESS MODE 🐱💗✨
-      <br>cats + sparkles + love everywhere
-    </p>
+function mainPage(){
+  document.getElementById("screen").innerHTML=`
+    <h1>Ritija 🥺💗</h1>
+    <p id="type"></p>
+    <button onclick="nextStage()">Moreeee 😭</button>
+    <button class="catBtn" onclick="catTap()">Tap the cats 🐱</button>
   `;
+  typeText();
+}
+
+const text = `
+Welcome to a tiny world that exists for one reason — you ✨
+
+A place full of floating cats 🐱, gentle sparkles, soft colors,
+and quiet feelings that don’t need explanations.
+
+You matter in ways that are calm, deep, and constant.
+Your presence makes ordinary moments feel lighter,
+and your existence alone is enough to make someone smile.
+
+If this world feels warm, it’s because it was made with care.
+If it feels soft, it’s because you deserve softness.
+And if it feels special, it’s because you are 💖
+
+You didn’t just unlock a page.
+You unlocked a feeling.
+`;
+
+let i=0;
+function typeText(){
+  if(i<text.length){
+    document.getElementById("type").innerHTML+=text[i++];
+    setTimeout(typeText,25);
+  }
+}
+
+function nextStage(){
+  explode(200);
+  notify("MAXIMUM CUTENESS MODE 🐱✨");
+}
+
+function catTap(){
+  clicks++;
+  explode(40);
+  if(clicks===3) notify("The cats like you 😺");
+  if(clicks===6) notify("The cats love you 🐱💖");
+  if(clicks===10) notify("You are the cat chosen one 👑🐱");
 }
 
 function spawn(){
-  const items=["🐱","❤️","✨","🌸","💖","⭐"];
   const el=document.createElement("div");
   el.className="fall";
-  el.innerHTML=items[Math.floor(Math.random()*items.length)];
+  el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
   el.style.left=Math.random()*100+"vw";
-  el.style.fontSize=(Math.random()*12+18)+"px";
-  el.style.animationDuration=(Math.random()*3+3)+"s";
+  el.style.fontSize=(Math.random()*14+18)+"px";
+  el.style.animationDuration=(Math.random()*3+4)+"s";
   document.body.appendChild(el);
-  setTimeout(()=>el.remove(),6000);
+  setTimeout(()=>el.remove(),8000);
 }
 
-function explosion(){
-  for(let i=0;i<70;i++) spawn();
+function explode(n){for(let i=0;i<n;i++) spawn()}
+
+function notify(msg){
+  const n=document.createElement("div");
+  n.className="popup";
+  n.innerText=msg;
+  document.body.appendChild(n);
+  setTimeout(()=>n.remove(),3000);
 }
 
-setInterval(spawn,250);
+setInterval(spawn,200);
+setInterval(()=>notify("Someone is thinking of you 💗"),18000);
 </script>
 
 </body>
