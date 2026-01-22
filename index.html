@@ -66,11 +66,22 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:24px;
+  padding:26px;
 }
 .page.active{display:flex}
 
 h1,h2,p{color:#ff3f8e}
+
+p{
+  max-width:760px;
+  line-height:2;
+  font-size:1.05rem;
+}
+
+/* TYPEWRITER */
+.type{
+  min-height:180px;
+}
 
 /* BUTTONS / INPUT */
 button{
@@ -170,56 +181,66 @@ input{
 <!-- PAGE 2 -->
 <div class="page" id="p2">
   <h1>Hey Ritija 🌸</h1>
-  <p>This page exists because being together matters.</p>
+  <div class="type" id="t2"></div>
   <button onclick="go(3)">Next</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-  <div class="heart">💗</div>
-  <p>This heart beats for every moment we shared.</p>
+  <div class="type" id="t3"></div>
   <button onclick="go(4)">Next</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <p>We are together for 💞</p>
-  <div class="timer" id="together"></div>
+  <div class="type" id="t4"></div>
   <button onclick="go(5)">Next</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-  <p>Total days together 🐾</p>
-  <div class="timer" id="days"></div>
+  <div class="type" id="t5"></div>
   <button onclick="go(6)">Next</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-  <p>Total weeks together 🐾</p>
-  <div class="timer" id="weeks"></div>
+  <p>We are together for 💞</p>
+  <div class="timer" id="together"></div>
   <button onclick="go(7)">Next</button>
 </div>
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-  <p>Total hours together 🐾</p>
-  <div class="timer" id="hours"></div>
+  <p>Total days together 🐾</p>
+  <div class="timer" id="days"></div>
   <button onclick="go(8)">Next</button>
 </div>
 
 <!-- PAGE 8 -->
 <div class="page" id="p8">
-  <p>Total seconds together 🐾</p>
-  <div class="timer" id="seconds"></div>
+  <p>Total weeks together 🐾</p>
+  <div class="timer" id="weeks"></div>
   <button onclick="go(9)">Next</button>
 </div>
 
-<!-- PAGE 9 PHOTO -->
+<!-- PAGE 9 -->
 <div class="page" id="p9">
-  <h1>You are so beautiful 💗</h1>
+  <p>Total hours together 🐾</p>
+  <div class="timer" id="hours"></div>
+  <button onclick="go(10)">Next</button>
+</div>
 
+<!-- PAGE 10 -->
+<div class="page" id="p10">
+  <p>Total seconds together 🐾</p>
+  <div class="timer" id="seconds"></div>
+  <button onclick="go(11)">Next</button>
+</div>
+
+<!-- PAGE 11 PHOTO -->
+<div class="page" id="p11">
+  <h1>You are so beautiful 💗</h1>
   <div class="slider" onclick="heartPop(event)">
     <!-- img1 … img16 -->
     <img src="img1.jpg" class="slide active" data-cap="You are so beautiful 💗">
@@ -239,27 +260,45 @@ input{
     <img src="img15.jpg" class="slide" data-cap="I choose you 🫶">
     <img src="img16.jpg" class="slide" data-cap="Always you.">
   </div>
-
   <div class="caption" id="cap">You are so beautiful 💗</div>
   <div class="counter" id="count">1 / 16</div>
 </div>
 
-<!-- PAGE 10 FINAL QUESTION -->
-<div class="page" id="p10">
+<!-- PAGE 12 FINAL QUESTION -->
+<div class="page" id="p12">
   <h1>One last question 💗</h1>
   <p>Who do I love the most?</p>
   <input id="finalAns">
   <button onclick="checkFinal()">Answer</button>
 </div>
 
-<!-- PAGE 11 END -->
-<div class="page" id="p11">
+<!-- PAGE 13 END -->
+<div class="page" id="p13">
   <h1>Always Ritija 💗</h1>
-  <p>No matter the photo, day, hour or second — the answer is you.</p>
+  <p>No matter the photo, the day, the hour or the second — the answer is you.</p>
   <button onclick="go(1)">Replay 🔁</button>
 </div>
 
 <script>
+/* TYPEWRITER TEXT */
+const texts={
+t2:"This page exists because some feelings deserve more than words. They deserve time, patience, and care. Being together is not about big moments alone, but about the quiet comfort of choosing each other again and again.",
+t3:"There is something incredibly special about finding someone who feels like home. Someone whose presence makes even ordinary moments feel meaningful and safe.",
+t4:"Love does not rush. It grows slowly, gently, and honestly. It learns, it understands, and it stays even when things are quiet.",
+t5:"Every second shared becomes a memory, and every memory becomes a part of us. That is what makes being together so beautiful."
+};
+
+function typeText(id,text){
+  let i=0;
+  const el=document.getElementById(id);
+  el.innerHTML="";
+  const timer=setInterval(()=>{
+    el.innerHTML+=text[i];
+    i++;
+    if(i>=text.length)clearInterval(timer);
+  },20);
+}
+
 /* START DATE (8 months approx) */
 const startDate=new Date(Date.now()-(8*30*24*60*60*1000));
 
@@ -279,15 +318,16 @@ function go(n){
   document.getElementById("p"+current).classList.remove("active");
   document.getElementById("p"+n).classList.add("active");
   current=n;
+  if(texts["t"+n])typeText("t"+n,texts["t"+n]);
 }
 
 /* PHOTO SLIDER */
 let i=0;
 const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
-  if(!document.getElementById("p9").classList.contains("active"))return;
+  if(!document.getElementById("p11").classList.contains("active"))return;
   if(i===slides.length-1){
-    setTimeout(()=>go(10),1500);
+    setTimeout(()=>go(12),1500);
     return;
   }
   slides[i].classList.remove("active");
@@ -310,7 +350,7 @@ function heartPop(e){
 
 /* FINAL CHECK */
 function checkFinal(){
-  if(finalAns.value.toLowerCase()==="ritija")go(11);
+  if(finalAns.value.toLowerCase()==="ritija")go(13);
 }
 
 /* FLOATING */
