@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Secret for You 💗</title>
+<title>For You 💗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -10,48 +10,49 @@ body{
   margin:0;
   height:100vh;
   font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee,#fdfbfb);
+  background-size:300% 300%;
+  animation:bg 10s ease infinite;
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
 }
-
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 .card{
-  background:rgba(255,255,255,0.9);
-  padding:28px;
+  background:rgba(255,255,255,0.95);
+  padding:26px;
   border-radius:30px;
-  max-width:380px;
+  max-width:390px;
   text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,0.3);
+  box-shadow:0 30px 70px rgba(0,0,0,0.35);
   animation:pop 1s ease;
 }
-
 @keyframes pop{
-  from{transform:scale(0.5);opacity:0}
+  from{transform:scale(0.4);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-
 h1{
   color:#ff5fa2;
-  font-size:2.2rem;
+  font-size:2.3rem;
 }
-
 p{
   color:#444;
   font-size:1.05rem;
   line-height:1.7;
 }
-
 input{
   padding:12px;
   border-radius:20px;
   border:2px solid #ffb3d9;
   width:80%;
-  text-align:center;
   font-size:1rem;
+  text-align:center;
 }
-
 button{
   margin-top:15px;
   padding:12px 30px;
@@ -61,23 +62,20 @@ button{
   color:white;
   font-size:1.05rem;
   cursor:pointer;
-  animation:bounce 1.4s infinite;
+  animation:bounce 1.3s infinite;
 }
-
 @keyframes bounce{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-7px)}
+  50%{transform:translateY(-8px)}
 }
-
-.heart,.sparkle,.cat{
+.fall{
   position:fixed;
   top:-10px;
-  animation:fall linear infinite;
   pointer-events:none;
+  animation:fall linear infinite;
 }
-
 @keyframes fall{
-  to{transform:translateY(110vh);opacity:0}
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
 </style>
 </head>
@@ -85,7 +83,7 @@ button{
 <body>
 
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3">
 </audio>
 
 <div class="card" id="screen">
@@ -100,58 +98,58 @@ button{
 function unlock(){
   const p=document.getElementById("pass").value;
   if(p==="prinsu"){
-    explode();
+    explosion();
     document.getElementById("screen").innerHTML=`
-      <h1>Hi Ritija 🥺💗</h1>
-      <img src="https://i.imgur.com/4AiXzf8.png" width="120"><br><br>
-
+      <h1>Ritija 🥺💗</h1>
+      <img src="https://i.imgur.com/4AiXzf8.png" width="120">
       <p>
-        I made this little world just for you ✨  
-        Somewhere between cute cats 🐱, sparkles 🌸  
-        and soft anime vibes 🎮  
-        I wanted you to feel how special you are.  
+        Welcome to a tiny world made only for you ✨  
+        A place full of soft colors, sparkles, cats 🐱  
+        and gentle feelings that remind you how special you are.
         <br><br>
-        If this page makes you smile even a little,  
-        then it has done exactly what it was meant to do 💖  
-        Because you deserve softness, warmth, and  
-        a thousand tiny happy moments every day.
+        If life ever feels loud, I hope this page feels quiet and warm 🌸  
+        Like sitting in a cozy corner of a fantasy world,  
+        with cute cats around and magic in the air 🎮✨
         <br><br>
-        You are precious. You are loved.  
-        And this page exists because of you 💌
+        You don’t have to do anything to deserve this.  
+        Your existence alone is enough 💖  
+        And somewhere out there is a heart that smiles  
+        just thinking about you 💌
       </p>
-
-      <button onclick="more()">Click for MORE CUTENESS 😭</button>
+      <button onclick="stageTwo()">Moreeee 😭</button>
     `;
-  }else{
-    alert("Nope 😼 try again");
+  } else {
+    alert("Wrong password 😼 try again");
   }
 }
 
-function more(){
-  explode();
+function stageTwo(){
+  explosion();
   document.getElementById("screen").innerHTML+=`
     <p style="color:#ff5fa2;font-weight:bold;">
-      You unlocked the cat army 🐱🐱🐱💗
+      YOU UNLOCKED MAX CUTENESS MODE 🐱💗✨
+      <br>cats + sparkles + love everywhere
     </p>
   `;
 }
 
 function spawn(){
-  const icons=["❤️","✨","🌸","🐱","💖"];
+  const items=["🐱","❤️","✨","🌸","💖","⭐"];
   const el=document.createElement("div");
-  el.className=Math.random()>0.7?"cat":"heart";
-  el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+  el.className="fall";
+  el.innerHTML=items[Math.floor(Math.random()*items.length)];
   el.style.left=Math.random()*100+"vw";
-  el.style.animationDuration=Math.random()*3+3+"s";
+  el.style.fontSize=(Math.random()*12+18)+"px";
+  el.style.animationDuration=(Math.random()*3+3)+"s";
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),6000);
 }
 
-function explode(){
-  for(let i=0;i<50;i++) spawn();
+function explosion(){
+  for(let i=0;i<70;i++) spawn();
 }
 
-setInterval(spawn,300);
+setInterval(spawn,250);
 </script>
 
 </body>
