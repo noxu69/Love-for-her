@@ -25,30 +25,31 @@ body{
 .side{position:fixed;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-weight:900;color:#ff3f8e}
 .left{left:4px}.right{right:4px}
 
-/* CATS */
-.cat-corner{position:fixed;font-size:26px;opacity:.9}
-.cat-tl{top:40px;left:10px}.cat-tr{top:40px;right:10px}
-.cat-bl{bottom:40px;left:10px}.cat-br{bottom:40px;right:10px}
-
 /* PAGES */
 .page{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px}
 .page.active{display:flex}
 h1,h2,p{color:#ff3f8e}
-p{max-width:780px;line-height:2.1;font-size:1.1rem;margin:12px 0}
-.type{min-height:220px}
+p{max-width:800px;line-height:2.1;font-size:1.12rem;margin:12px 0}
+.type{min-height:240px}
 
 /* INPUT + BUTTON */
 input{padding:14px;border-radius:25px;border:none;width:220px;text-align:center;font-size:1rem}
 button{
-  margin-top:26px;padding:14px 40px;border:none;border-radius:32px;
+  margin-top:22px;padding:14px 40px;border:none;border-radius:32px;
   background:linear-gradient(135deg,#ff5fa2,#ff9acb);
   color:white;font-size:1.05rem;font-weight:700;
   box-shadow:0 10px 28px rgba(255,105,180,.45)
 }
 button:active{transform:scale(.96)}
 
-/* FLOATING CATS + HEARTS */
-.float{position:fixed;top:-10px;animation:fall 6s linear infinite;pointer-events:none}
+/* CAT BUTTON */
+.cat-btn{
+  background:linear-gradient(135deg,#ff85b3,#ffb3d9);
+  margin-top:16px;
+}
+
+/* FLOATING */
+.float{position:fixed;top:-20px;animation:fall 6s linear infinite;pointer-events:none}
 @keyframes fall{to{transform:translateY(120vh);opacity:0}}
 
 /* HEART */
@@ -74,12 +75,6 @@ button:active{transform:scale(.96)}
 <div class="side left">I love Ritija 💗</div>
 <div class="side right">I love Ritija 💗</div>
 
-<!-- CATS -->
-<div class="cat-corner cat-tl">🐱</div>
-<div class="cat-corner cat-tr">🐱</div>
-<div class="cat-corner cat-bl">🐱</div>
-<div class="cat-corner cat-br">🐱</div>
-
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
   <h2>🔐 Secret</h2>
@@ -102,76 +97,74 @@ button:active{transform:scale(.96)}
   <button onclick="go(4)">Next 🥺</button>
 </div>
 
-<!-- PAGE 4 (TOGETHER TIMER) -->
+<!-- PAGE 4 -->
 <div class="page" id="p4">
+  <div class="type" id="t4"></div>
+  <button onclick="go(5)">Next 💞</button>
+</div>
+
+<!-- PAGE 5 (TOGETHER) -->
+<div class="page" id="p5">
   <p>We are together for 💞</p>
   <div class="timer" id="together"></div>
-  <button onclick="go(5)">Next 🐱</button>
+  <button class="cat-btn" onclick="dropCats()">🐱 Tap for Cats 🐱</button>
+  <button onclick="go(6)">Next 🐾</button>
 </div>
 
-<!-- PAGE 5 (TOTAL DAYS) -->
-<div class="page" id="p5">
-  <p>Total days together 🐾</p>
-  <div class="timer big" id="days"></div>
-  <button onclick="go(6)">Next 🐱</button>
-</div>
-
-<!-- PAGE 6 (TOTAL WEEKS) -->
+<!-- PAGE 6 (DAYS) -->
 <div class="page" id="p6">
-  <p>Total weeks together 🐾</p>
-  <div class="timer big" id="weeks"></div>
-  <button onclick="go(7)">Next 🐱</button>
+  <p>Total days together 🐱</p>
+  <div class="timer big" id="days"></div>
+  <button class="cat-btn" onclick="dropCats()">More Cats 🐱</button>
+  <button onclick="go(7)">Next 🐾</button>
 </div>
 
-<!-- PAGE 7 (TOTAL HOURS) -->
+<!-- PAGE 7 (WEEKS) -->
 <div class="page" id="p7">
-  <p>Total hours together 🐾</p>
-  <div class="timer big" id="hours"></div>
-  <button onclick="go(8)">Next 🐱</button>
+  <p>Total weeks together 🐱</p>
+  <div class="timer big" id="weeks"></div>
+  <button class="cat-btn" onclick="dropCats()">Cats Again 🐱</button>
+  <button onclick="go(8)">Next 🐾</button>
 </div>
 
-<!-- PAGE 8 (TOTAL SECONDS + END) -->
+<!-- PAGE 8 (HOURS + END) -->
 <div class="page" id="p8">
-  <p>Total seconds together 🐾</p>
-  <div class="timer big" id="seconds"></div>
+  <p>Total hours together 🐱</p>
+  <div class="timer big" id="hours"></div>
+  <button class="cat-btn" onclick="dropCats()">CAT ATTACK 🐱</button>
   <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-/* BIG TEXT */
+/* BIG PARAGRAPHS */
 const texts={
-  t2:["This page exists because being together matters. It is about choosing each other calmly, quietly, and sincerely, even in the smallest moments."],
-  t3:["This heart beats for us. For every day, every hour, every second that slowly turned into something meaningful and real."]
+t2:["This page exists because some feelings deserve patience. Being together is not about rushing moments or counting achievements. It is about choosing presence, comfort, and understanding every single day. It is about feeling calm in someone’s presence and knowing that even silence can feel full."],
+t3:["This heart represents every shared moment, even the ones that felt small. It beats for conversations that mattered, laughter that felt effortless, and moments of quiet comfort. Real connection is built slowly, and that is what makes it strong."],
+t4:["Togetherness is not loud. It does not demand attention. It stays, it grows, and it becomes a part of who we are. This page is not meant to impress. It is meant to be honest about how being together can feel safe, warm, and real."]
 };
+
+/* TYPEWRITER */
 function typeLines(el, lines){
   let i=0,j=0; el.innerHTML="";
   (function next(){
     if(i<lines.length){
       if(j<=lines[i].length){
         el.innerHTML=lines[i].slice(0,j++);
-        setTimeout(next,18);
+        setTimeout(next,16);
       }
     }
   })();
 }
 
-/* START FROM 8 MONTHS OFFSET */
+/* TIMER OFFSET (8 MONTHS) */
 const startDate=new Date(Date.now()-(8*30*24*60*60+14*24*60*60+5*60*60+49*60+30)*1000);
-
-/* UPDATE ALL TIME VALUES */
 function update(){
   const diffSec=Math.floor((Date.now()-startDate)/1000);
-  const s=diffSec%60;
-  const m=Math.floor(diffSec/60)%60;
-  const h=Math.floor(diffSec/3600)%24;
-  const d=Math.floor(diffSec/86400)%30;
-  const mo=Math.floor(diffSec/(30*86400));
-
-  together.innerText=`${mo} months ${d} days ${h} hours ${m} minutes ${s} seconds 💗`;
+  together.innerText=
+    `${Math.floor(diffSec/(30*86400))} months ${Math.floor(diffSec/86400)%30} days ${Math.floor(diffSec/3600)%24} hours ${Math.floor(diffSec/60)%60} minutes ${diffSec%60} seconds 💗`;
   days.innerText=`${Math.floor(diffSec/86400)} days 💗`;
   weeks.innerText=`${Math.floor(diffSec/(7*86400))} weeks 💗`;
   hours.innerText=`${Math.floor(diffSec/3600)} hours 💗`;
-  seconds.innerText=`${diffSec} seconds 💗`;
 }
 setInterval(update,1000); update();
 
@@ -190,15 +183,18 @@ function replay(){
   current=1;
 }
 
-/* FLOATING CATS + HEARTS */
-setInterval(()=>{
-  const e=document.createElement("div");
-  e.className="float";
-  e.innerHTML=["🐱","💗","🐾","✨","🌸"][Math.floor(Math.random()*5)];
-  e.style.left=Math.random()*100+"vw";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6000);
-},320);
+/* CAT DROP FUNCTION */
+function dropCats(){
+  for(let i=0;i<12;i++){
+    const e=document.createElement("div");
+    e.className="float";
+    e.innerHTML=["🐱","🐾","💗","✨"][Math.floor(Math.random()*4)];
+    e.style.left=Math.random()*100+"vw";
+    e.style.fontSize=(Math.random()*14+22)+"px";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),6000);
+  }
+}
 </script>
 
 </body>
